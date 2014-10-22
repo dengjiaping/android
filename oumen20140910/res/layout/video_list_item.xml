@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/padding_medium"
+    android:background="@drawable/mv_video_list_item_bg"
+    android:padding="@dimen/padding_medium" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp" >
+
+        <TextView
+            android:id="@+id/nav_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_large"
+            android:singleLine="true"
+            android:layout_marginRight="100dp" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/text_small" />
+    </FrameLayout>
+
+    <com.oumen.mv.VideoPlayerView
+        android:id="@+id/player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="40dp" />
+
+    <ProgressBar
+        android:id="@+id/pb_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="43dp"
+        android:progressDrawable="@drawable/upload_progress"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/btn_left_bottom"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_gravity="left|bottom"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:background="@drawable/btn_bg0"
+        android:contentDescription="@string/image_description"
+        android:src="@drawable/icon_delete" />
+
+    <Button
+        android:id="@+id/btn_right_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:background="@drawable/btn_bg0"
+        android:text="@string/share"
+        android:textSize="@dimen/text_medium" />
+
+</FrameLayout>

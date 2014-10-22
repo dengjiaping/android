@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <!-- 标题行 -->
+
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/location_flag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titlebar"
+        android:background="@color/default_grey_text_bg"
+        android:paddingLeft="@dimen/default_big_gap"
+        android:paddingTop="@dimen/to_small_gap"
+        android:text="当前定位城市"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/default_editsize_small" />
+
+    <TextView
+        android:id="@+id/location_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location_flag"
+        android:background="@drawable/white_and_grey_selector"
+        android:paddingLeft="@dimen/padding_large"
+        android:paddingRight="35dp"
+        android:paddingTop="@dimen/padding_large"
+        android:paddingBottom="@dimen/padding_large"
+        android:singleLine="true"
+        android:hint="正在定位..."
+        android:textColor="@color/calander_title_text"
+        android:textSize="@dimen/text_pretty"
+        android:drawableRight="@drawable/confirm_huodong" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location_city"
+        android:background="@null"
+        android:cacheColorHint="#00000000"
+        android:scrollbars="none" />
+
+    <com.oumen.widget.sortview.SideBar
+        android:id="@+id/sidebar"
+        android:layout_width="30.0dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/list" />
+
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/show_head_toast_bg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

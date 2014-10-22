@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:padding="@dimen/padding_medium" >
+
+    <ImageView
+        android:id="@+id/cover"
+        android:layout_width="@dimen/icon_medium"
+        android:layout_height="@dimen/icon_medium"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/padding_small"
+        android:layout_marginLeft="@dimen/padding_small"
+        android:contentDescription="@string/image_description"
+        android:src="@drawable/pic_default"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/nav_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignTop="@+id/cover"
+        android:layout_marginLeft="@dimen/padding_small"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:layout_toLeftOf="@+id/cover"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_large" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nav_title"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/padding_small"
+        android:layout_toLeftOf="@+id/cover"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/text_grey"
+        android:textSize="@dimen/text_pretty" />
+
+    <TextView
+        android:id="@+id/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/time"
+        android:layout_marginLeft="@dimen/padding_small"
+        android:layout_toLeftOf="@+id/cover"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/text_grey"
+        android:textSize="@dimen/text_pretty" />
+
+</RelativeLayout>
