@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/progress_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/padding_medium">
+        
+	    <ProgressBar
+	        style="?android:attr/progressBarStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:indeterminate="true" />
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:textColor="@color/black"
+	        android:textSize="@dimen/text_medium"
+	        android:text="@string/loading" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/preview_bar"
+        android:cacheColorHint="@android:color/transparent"
+        android:fadingEdge="none"
+        android:horizontalSpacing="1dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="4"
+        android:padding="0dp"
+        android:scrollingCache="true"
+        android:smoothScrollbar="true"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp" />
+
+    <FrameLayout
+        android:id="@+id/preview_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/widget_pick_image_preview_bar_bg"
+        android:padding="@dimen/padding_default">
+
+        <Button
+            android:id="@+id/preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_pick_image_preview_btn"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_small"
+            android:paddingBottom="@dimen/padding_small"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/white"
+            android:text="@string/preview" />
+        
+        <TextView
+            android:id="@+id/tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+        
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_pick_image_finish_btn"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_small"
+            android:paddingBottom="@dimen/padding_small"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/white"
+            android:text="@string/finish"
+            android:layout_gravity="right" />
+    </FrameLayout>
+
+</RelativeLayout>

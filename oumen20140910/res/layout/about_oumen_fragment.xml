@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_grey_text_bg"
+    android:orientation="vertical" >
+
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/oumen_icon_tobig" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/padding_super"
+        android:text="偶 们"
+        android:textColor="@color/default_text_bg"
+        android:textSize="@dimen/text_super" />
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/padding_micro"
+        android:text="V3.0.0"
+        android:textColor="@color/user_center_text_bg"
+        android:textSize="@dimen/text_pretty" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:text="我们（北京）科技有限公司"
+        android:textColor="@color/user_center_text_bg"
+        android:textSize="@dimen/text_large" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/padding_large"
+        android:text="www.oumen.com"
+        android:textColor="@color/user_center_text_bg"
+        android:textSize="@dimen/text_pretty" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/radius_small"
+        android:text="©2013 Oumen Inc."
+        android:textColor="@color/user_center_text_bg"
+        android:textSize="@dimen/text_small" />
+
+</LinearLayout>

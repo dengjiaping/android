@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.oumen.widget.calander.CalanderView
+        android:id="@+id/calander"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/clear_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large"
+        android:background="@drawable/light_blue_btnselector"
+        android:padding="@dimen/padding_large"
+        android:text="清空日期"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_pretty" />
+
+    <LinearLayout
+        android:id="@+id/order_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:background="@color/default_line_bg"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/age_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:background="@color/default_line_bg"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>

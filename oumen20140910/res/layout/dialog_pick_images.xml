@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/pick_image_bg" >
+    <LinearLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:orientation="vertical">
+        <Button 
+            android:id="@+id/btn_camera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="拍照"
+            android:paddingLeft="@dimen/default_big_gap"
+            android:paddingRight="@dimen/default_big_gap"
+            android:paddingBottom="@dimen/default_gap"
+            android:paddingTop="@dimen/default_gap"
+            android:background="@drawable/pickimage_btnselector"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_nav_textsize"/>
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_one_dp"
+            android:background="@color/pick_image_btn_click"/>
+        <Button 
+            android:id="@+id/btn_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选取本地图片"
+            android:paddingLeft="@dimen/default_big_gap"
+            android:paddingRight="@dimen/default_big_gap"
+            android:paddingBottom="@dimen/default_gap"
+            android:paddingTop="@dimen/default_gap"
+            android:background="@drawable/pickimage_btnselector"
+            android:textColor="@color/white"
+            android:textSize="@dimen/default_nav_textsize"/>
+    </LinearLayout>
+
+    <!--<RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/pick_images"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dialog_title_text_size" />
+
+        <TextView
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="@dimen/default_gap"
+            android:drawableTop="@drawable/diarycreama"
+            android:gravity="center"
+            android:text="@string/camera"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dialog_title_text_size" />
+
+        <TextView
+            android:id="@+id/album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/camera"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/camera"
+            android:drawableTop="@drawable/diary_photos"
+            android:gravity="center"
+            android:text="@string/album"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dialog_title_text_size" />
+    </RelativeLayout>  -->
+
+</FrameLayout>

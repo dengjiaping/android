@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ProgressBar
+        android:id="@+id/image_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <!-- android:adjustViewBounds="true"  -->
+    <com.oumen.widget.preview.image.PhotoView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"/>
+
+    <FrameLayout
+        android:id="@+id/framgnent_buttom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/widget_pick_image_preview_bar_bg"
+        android:padding="@dimen/padding_default"
+        android:layout_gravity="bottom">
+
+        <ImageView
+            android:id="@+id/checkbox"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="@dimen/padding_default"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_unchecked"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:background="@drawable/widget_pick_image_finish_btn"
+            android:paddingBottom="@dimen/padding_small"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_small"
+            android:text="@string/finish"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_medium"
+            android:visibility="visible" />
+    </FrameLayout>
+
+</FrameLayout>

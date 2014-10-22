@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical" >
+
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <EditText
+        android:id="@+id/et_newlogin_email"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/popup_send_content_height"
+        android:layout_above="@+id/et_newlogin_pwd"
+        android:layout_marginLeft="@dimen/default_tobig_gap"
+        android:layout_marginRight="@dimen/default_tobig_gap"
+        android:background="@drawable/login_edittext_bg"
+        android:drawableLeft="@drawable/newlogin_email"
+        android:drawablePadding="@dimen/default_gap"
+        android:gravity="center_vertical"
+        android:hint="邮箱/手机号"
+        android:inputType="textEmailAddress"
+        android:paddingBottom="@dimen/small_gap"
+        android:paddingLeft="@dimen/default_gap"
+        android:paddingTop="@dimen/small_gap"
+        android:singleLine="true"
+        android:textColor="@color/login_edittext"
+        android:textColorHint="@color/login_edittext"
+        android:textSize="@dimen/default_editsize_big" />
+
+    <EditText
+        android:id="@+id/et_newlogin_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/popup_send_content_height"
+        android:layout_above="@+id/login"
+        android:layout_marginLeft="@dimen/default_tobig_gap"
+        android:layout_marginRight="@dimen/default_tobig_gap"
+        android:layout_marginTop="@dimen/default_gap"
+        android:background="@drawable/login_edittext_bg"
+        android:drawableLeft="@drawable/newlogin_lock"
+        android:drawablePadding="@dimen/default_gap"
+        android:gravity="center_vertical"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:paddingBottom="@dimen/small_gap"
+        android:paddingLeft="@dimen/default_gap"
+        android:paddingTop="@dimen/small_gap"
+        android:singleLine="true"
+        android:textColor="@color/login_edittext"
+        android:textColorHint="@color/login_edittext"
+        android:textSize="@dimen/default_editsize_big" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/image_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/login_buttom_bg" />
+
+    <TextView
+        android:id="@+id/third_login_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_login"
+        android:layout_marginBottom="@dimen/default_nav_btn_gap"
+        android:gravity="center_horizontal"
+        android:text="@string/nav_login_tip"
+        android:textColor="@color/rigister_items_text"
+        android:textSize="@dimen/default_editsize" />
+
+    <LinearLayout
+        android:id="@id/ll_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/default_nav_height"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_newlogin_sina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/default_big_gap"
+            android:background="@drawable/newsina_btnselector"
+            android:contentDescription="@string/image_description" />
+
+        <ImageView
+            android:id="@+id/iv_newlogin_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_big_gap"
+            android:layout_marginRight="@dimen/default_big_gap"
+            android:background="@drawable/newqq_btnselector"
+            android:contentDescription="@string/image_description" />
+
+        <ImageView
+            android:id="@+id/iv_newlogin_weixin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_big_gap"
+            android:background="@drawable/newweixin_btnselector"
+            android:contentDescription="@string/image_description" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_login_findpwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:background="@drawable/login_btnselector"
+        android:padding="@dimen/small_gap"
+        android:text="@string/nav_login_btn"
+        android:textColor="@color/login_btn_text"
+        android:textSize="@dimen/default_big_textsize" />
+
+    <TextView
+        android:id="@+id/tv_login_findpwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/third_login_tag"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="@dimen/default_gap"
+        android:gravity="center"
+        android:padding="@dimen/default_gap"
+        android:text="忘记密码？"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_pretty" />
+
+    <FrameLayout
+        android:id="@+id/layer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:visibility="gone" />
+
+</RelativeLayout>

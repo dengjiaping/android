@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_grey_text_bg" >
+
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/ll_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titlebar"
+        android:background="@color/search_bg" >
+
+        <com.oumen.widget.editview.ClearEditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_edtitext_height"
+            android:layout_margin="@dimen/default_gap"
+            android:background="@drawable/input_background"
+            android:hint="搜索"
+            android:paddingLeft="@dimen/small_gap"
+            android:singleLine="true"
+            android:textSize="@dimen/default_editsize" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_one_dp"
+        android:layout_below="@+id/ll_search"
+        android:layout_gravity="bottom"
+        android:background="@color/login_line" />
+
+    <FrameLayout
+        android:id="@+id/add_friend_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:textColor="@color/chat_search" >
+
+        <ImageView
+            android:layout_width="@dimen/default_photo_size"
+            android:layout_height="@dimen/default_photo_size"
+            android:layout_gravity="left"
+            android:layout_marginBottom="@dimen/default_gap"
+            android:layout_marginLeft="@dimen/default_big_gap"
+            android:layout_marginTop="@dimen/default_gap"
+            android:src="@drawable/addfriend" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="86dp"
+            android:padding="4dp"
+            android:text="添加好友"
+            android:textColor="@color/chat_search_blue"
+            android:textSize="@dimen/text_medium" />
+
+        <ImageView
+            android:layout_width="@dimen/default_login_gap_height"
+            android:layout_height="@dimen/default_login_gap_height"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="@dimen/default_login_gap_height"
+            android:src="@drawable/addfriendgo" />
+    </FrameLayout>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_one_dp"
+        android:layout_below="@+id/add_friend_container"
+        android:layout_gravity="bottom"
+        android:background="@color/login_line" />
+
+    <ListView
+        android:id="@+id/lst"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line2"
+        android:layout_marginTop="@dimen/small_gap"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:listSelector="@null" />
+
+    <com.oumen.widget.sortview.SideBar
+        android:id="@+id/sidebar"
+        android:layout_width="30.0dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/lst" />
+
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/show_head_toast_bg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

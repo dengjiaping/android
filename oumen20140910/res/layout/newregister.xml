@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/usercenter_background"
+    android:orientation="vertical" >
+
+    <!-- 标题行 -->
+
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/default_bg"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/register_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/popup_send_content_height"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="@dimen/default_tobig_gap"
+            android:layout_marginRight="@dimen/default_tobig_gap"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/login_edittext_bg"
+            android:drawableLeft="@drawable/register_nickname"
+            android:drawablePadding="@dimen/default_gap"
+            android:hint="@string/nickname"
+            android:paddingBottom="@dimen/small_gap"
+            android:paddingLeft="@dimen/default_gap"
+            android:paddingRight="@dimen/default_gap"
+            android:paddingTop="@dimen/small_gap"
+            android:singleLine="true"
+            android:textColorHint="@color/login_edittext"
+            android:textColor="@color/login_edittext"
+            android:textSize="@dimen/default_editsize_big" />
+
+        <EditText
+            android:id="@+id/newregister_email"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/popup_send_content_height"
+            android:layout_below="@id/register_nickname"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="@dimen/default_tobig_gap"
+            android:layout_marginRight="@dimen/default_tobig_gap"
+            android:layout_marginTop="@dimen/small_gap"
+            android:background="@drawable/login_edittext_bg"
+            android:drawableLeft="@drawable/newlogin_email"
+            android:drawablePadding="@dimen/default_gap"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="@dimen/small_gap"
+            android:paddingLeft="@dimen/default_gap"
+            android:paddingRight="@dimen/default_gap"
+            android:paddingTop="@dimen/small_gap"
+            android:singleLine="true"
+            android:textColorHint="@color/login_edittext"
+            android:textColor="@color/login_edittext"
+            android:textSize="@dimen/default_editsize_big" />
+
+        <EditText
+            android:id="@+id/et_newregister_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/popup_send_content_height"
+            android:layout_below="@id/newregister_email"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="@dimen/default_tobig_gap"
+            android:layout_marginRight="@dimen/default_tobig_gap"
+            android:layout_marginTop="@dimen/small_gap"
+            android:background="@drawable/login_edittext_bg"
+            android:drawableLeft="@drawable/newlogin_lock"
+            android:drawablePadding="@dimen/default_gap"
+            android:hint="请输入6—10位密码"
+            android:inputType="textPassword"
+            android:paddingBottom="@dimen/small_gap"
+            android:paddingLeft="@dimen/default_gap"
+            android:paddingTop="@dimen/small_gap"
+            android:singleLine="true"
+            android:textColorHint="@color/login_edittext"
+            android:textColor="@color/login_edittext"
+            android:textSize="@dimen/default_editsize_big" />
+
+        <EditText
+            android:id="@+id/et_newregister_pwdagain"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/popup_send_content_height"
+            android:layout_below="@id/et_newregister_pwd"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="@dimen/default_tobig_gap"
+            android:layout_marginRight="@dimen/default_tobig_gap"
+            android:layout_marginTop="@dimen/small_gap"
+            android:background="@drawable/login_edittext_bg"
+            android:drawableLeft="@drawable/newlogin_lock"
+            android:drawablePadding="@dimen/default_gap"
+            android:hint="@string/confrim_password"
+            android:inputType="textPassword"
+            android:paddingBottom="@dimen/small_gap"
+            android:paddingLeft="@dimen/default_gap"
+            android:paddingTop="@dimen/small_gap"
+            android:singleLine="true"
+            android:textColorHint="@color/login_edittext"
+            android:textColor="@color/login_edittext"
+            android:textSize="@dimen/default_editsize_big" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/login_buttom_bg" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_newregister_pwdagain"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_big_gap"
+            android:background="@drawable/login_btnselector"
+            android:padding="@dimen/small_gap"
+            android:text="@string/register"
+            android:textColor="@color/login_btn_text"
+            android:textSize="@dimen/default_big_textsize" />
+
+        <TextView
+            android:id="@+id/register_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/register"
+            android:layout_marginTop="@dimen/default_tobig_gap"
+            android:gravity="center_horizontal"
+            android:text="点击“完成”即意味着你已阅读并同意"
+            android:textColor="@color/rigister_items_text"
+            android:textSize="@dimen/default_editsize" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/register_tip"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_newregister_privateitem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="隐私政策"
+                android:textColor="@color/rigister_items_text"
+                android:textSize="@dimen/default_editsize"
+                android:typeface="monospace" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text=" 和 "
+                android:textColor="@color/rigister_items_text"
+                android:textSize="@dimen/default_editsize" />
+
+            <TextView
+                android:id="@+id/tv_newregister_serveitem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:text="服务条款"
+                android:textColor="@color/rigister_items_text"
+                android:textSize="@dimen/default_editsize"
+                android:typeface="monospace" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

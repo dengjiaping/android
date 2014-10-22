@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <corners android:radius="5dp" />
+	<solid android:color="@color/oumen_circle_more_pop_bg" />
+	<stroke android:color="@color/oumen_circle_more_pop_linebg"
+	    android:width="@dimen/default_one_dp"/>
+</shape>

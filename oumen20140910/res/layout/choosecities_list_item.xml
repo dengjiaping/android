@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_choosecityitem_cities"
+    android:layout_width="match_parent"
+    android:layout_height="38dp"
+    android:padding="@dimen/padding_large"
+    android:cacheColorHint="#00000000"
+    android:drawableRight="@drawable/arrows"
+    android:gravity="center_vertical"
+    android:textColor="@color/default_text_bg"
+    android:textSize="@dimen/text_medium" />

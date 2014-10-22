@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootview"
+    android:layout_width="match_parent"
+    android:layout_height="260dp"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_gravity="bottom"
+    android:gravity="bottom" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tag_container"/>
+
+    <LinearLayout
+        android:id="@+id/tag_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/imageview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/small_biaoqing_tag"
+            android:background="@color/biaoqing_tip_click" />
+
+        <ImageView
+            android:id="@+id/imageview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/ouba_tag"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imageview3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_description"
+            android:src="@drawable/ciwei_tag"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+</RelativeLayout>

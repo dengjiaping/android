@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical" >
+
+    <!-- 标题行 -->
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:id="@+id/textview_center"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_big_gap"
+                android:background="@color/usercenter_background1"
+                android:paddingBottom="12dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="18dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_one_dp"
+                android:background="@color/usercenter_background1" />
+
+            <RelativeLayout
+                android:id="@+id/linearlayout_centeredit_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/default_bg_up" >
+
+                <EditText
+                    android:id="@+id/tv_centeredit_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_toLeftOf="@+id/centeredit_photos"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/center_edit_nickname"
+                    android:drawablePadding="@dimen/default_gap"
+                    android:hint="@string/nickname"
+                    android:paddingBottom="@dimen/small_gap"
+                    android:paddingLeft="@dimen/default_big_gap"
+                    android:paddingTop="@dimen/small_gap"
+                    android:textSize="@dimen/default_editsize" >
+
+                    <requestFocus android:layout_height="match_parent" />
+                </EditText>
+
+                <View
+                    android:id="@+id/ll_centeredit_line1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/tv_centeredit_nickname"
+                    android:layout_toLeftOf="@+id/centeredit_photos"
+                    android:layout_toRightOf="@+id/tv_centeredit_nickname"
+                    android:background="@color/usercenter_background1"
+                    android:orientation="horizontal" />
+
+                <TextView
+                    android:id="@+id/tv_centeredit_omnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/ll_centeredit_line1"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/centeredit_omnum"
+                    android:drawablePadding="@dimen/default_gap"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="@string/oumen_number"
+                    android:paddingBottom="@dimen/small_gap"
+                    android:paddingLeft="@dimen/default_big_gap"
+                    android:paddingTop="@dimen/small_gap"
+                    android:textColor="@color/default_text_bg"
+                    android:textSize="@dimen/default_editsize" >
+                </TextView>
+
+                <View
+                    android:id="@+id/ll_centeredit_line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/tv_centeredit_omnum"
+                    android:layout_toLeftOf="@+id/centeredit_photos"
+                    android:background="@color/usercenter_background1"
+                    android:orientation="horizontal" />
+
+                <TextView
+                    android:id="@+id/tv_centeredit_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/ll_centeredit_line2"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:drawableLeft="@drawable/center_location"
+                    android:drawablePadding="@dimen/default_gap"
+                    android:gravity="center_vertical"
+                    android:hint="所在城市"
+                    android:paddingBottom="@dimen/small_gap"
+                    android:paddingLeft="@dimen/default_big_gap"
+                    android:paddingTop="@dimen/small_gap"
+                    android:textColor="@color/default_text_bg"
+                    android:textSize="@dimen/default_editsize" />
+
+                <ImageView
+                    android:id="@+id/centeredit_photos"
+                    android:layout_width="@dimen/big_photo_size"
+                    android:layout_height="@dimen/big_photo_size"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/default_gap"
+                    android:src="@drawable/round_user_photo"
+                    android:contentDescription="@string/image_description" />
+
+                <View
+                    android:id="@+id/ll_centeredit_line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/tv_centeredit_address"
+                    android:background="@color/usercenter_background1"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/default_bg"
+                android:paddingBottom="@dimen/default_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/default_gap"
+                android:text="宝宝信息"
+                android:textColor="@color/default_text_bg"
+                android:textSize="@dimen/default_editsize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_one_dp"
+                android:background="@color/usercenter_background1" />
+
+            <TextView
+                android:id="@+id/tv_centeredit_pargentstate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/default_bg_up"
+                android:drawableLeft="@drawable/center_pregnancy"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/small_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/small_gap"
+                android:text="出生状态"
+                android:textColor="@color/default_text_bg"
+                android:textSize="@dimen/default_editsize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_one_dp"
+                android:background="@color/usercenter_background1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/default_bg"
+                android:paddingBottom="@dimen/default_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/default_gap"
+                android:textColor="@color/default_text_bg"
+                android:textSize="@dimen/default_editsize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_one_dp"
+                android:background="@color/usercenter_background1" />
+
+            <TextView
+                android:id="@+id/tv_centeredit_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/default_bg_up"
+                android:drawableLeft="@drawable/centeredit_lock"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/small_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/small_gap"
+                android:text="更改密码"
+                android:textColor="@color/default_text_bg"
+                android:textSize="@dimen/default_editsize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_one_dp"
+                android:background="@color/usercenter_background1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/default_bg"
+                android:paddingBottom="@dimen/default_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/default_gap"
+                android:text="私人信息"
+                android:textColor="@color/default_text_bg"
+                android:textSize="@dimen/default_editsize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_one_dp"
+                android:background="@color/usercenter_background1" />
+            <!-- 私人信件 -->
+
+            <TextView
+                android:id="@+id/tv_centeredit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/default_bg_up"
+                android:drawableLeft="@drawable/center_mail"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:hint="@string/email"
+                android:paddingBottom="@dimen/small_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/small_gap"
+                android:textColor="@color/default_text_bg"
+                android:textSize="@dimen/default_editsize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_one_dp"
+                android:background="@color/usercenter_background1" />
+
+            <RelativeLayout
+                android:id="@+id/rl_centeredit_usersex"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/default_bg_up"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <RadioGroup
+                    android:id="@+id/rg_centeredit_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/iv_centeredit_usersex"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/small_gap"
+                    android:paddingTop="@dimen/small_gap" >
+
+                    <RadioButton
+                        android:id="@+id/rb_centeredit_mam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/usersex_radiobtnselector"
+                        android:drawablePadding="@dimen/small_gap"
+                        android:paddingLeft="@dimen/default_gap"
+                        android:text="@string/usersex_man"
+                        android:textColor="@color/default_text_bg"
+                        android:textSize="@dimen/default_editsize" />
+
+                    <RadioButton
+                        android:id="@+id/rb_centeredit_femam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/usersex_radiobtnselector"
+                        android:drawablePadding="@dimen/small_gap"
+                        android:paddingLeft="@dimen/default_big_gap"
+                        android:text="@string/usersex_feman"
+                        android:textColor="@color/default_text_bg"
+                        android:textSize="@dimen/default_editsize" />
+                </RadioGroup>
+
+                <ImageView
+                    android:id="@+id/iv_centeredit_usersex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/default_big_gap"
+                    android:src="@drawable/boyorgirl" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_one_dp"
+                android:background="@color/usercenter_background1" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
