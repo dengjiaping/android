@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <!-- =================标题行================== -->
+
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height" />
+
+    <com.oumen.widget.list.HSZListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/send_panel"
+        android:layout_below="@+id/titlebar"
+        android:background="@color/white" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/list"
+        android:layout_alignTop="@+id/list"
+        android:background="@color/red"
+        android:visibility="gone" >
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/send_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <!-- 底部布局 -->
+
+        <FrameLayout
+            android:id="@+id/rl_chatcontent_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/default_grey_text_bg"
+            android:gravity="center_vertical"
+            android:paddingTop="@dimen/padding_micro"
+            android:paddingBottom="@dimen/padding_micro" >
+
+            <ImageView
+                android:id="@+id/biaoqing"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/expression" />
+
+            <EditText
+                android:id="@+id/input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="60dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/login_edit_normal"
+                android:paddingLeft="@dimen/padding_large"
+                android:paddingRight="@dimen/padding_large" />
+
+            <Button
+                android:id="@+id/send"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/padding_small"
+                android:background="@drawable/chat_send_btn"
+                android:text="@string/send"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_small" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white" />
+
+        <com.oumen.biaoqing.EmojiView
+            android:id="@+id/biaoqinglist"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_gravity="bottom"
+            android:focusable="false"
+            android:gravity="bottom"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/layer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/list"
+        android:layout_alignTop="@+id/list"
+        android:background="@android:color/transparent"
+        android:visibility="gone" />
+
+</RelativeLayout>

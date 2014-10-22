@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/default_gap" >
+
+	<com.oumen.widget.image.shape.RoundRectangleImageView
+        android:id="@+id/photo"
+        android:layout_width="@dimen/activitys_list_item_pic_size"
+        android:layout_height="@dimen/activitys_list_item_pic_size"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/default_gap"
+        android:src="@drawable/near_photo_default" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/name"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/default_gap"
+        android:layout_marginRight="@dimen/default_gap"
+        android:singleLine="true"
+        android:textColor="@color/default_text_bg"
+        android:textSize="@dimen/default_editsize_small" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/photo"
+        android:layout_toLeftOf="@+id/distance"
+        android:layout_toRightOf="@+id/photo"
+        android:singleLine="true"
+        android:textColor="@color/default_text_bg"
+        android:textSize="@dimen/default_editsize_big" />
+
+    <TextView
+        android:id="@+id/sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/photo"
+        android:layout_toRightOf="@+id/photo"
+        android:gravity="center"
+        android:singleLine="true"
+        android:layout_marginRight="@dimen/default_gap"
+        android:textSize="@dimen/default_editsize" />
+
+    <TextView
+        android:id="@+id/baby_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/name"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="15dp"
+        android:padding="@dimen/small_gap"
+        android:background="@drawable/round_baby_girl"
+        android:drawableLeft="@drawable/near_baby_girl"
+        android:drawablePadding="@dimen/small_gap"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_editsize_tosmall" />
+
+</RelativeLayout>

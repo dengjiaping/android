@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_container_bg"
+    android:orientation="vertical" >
+
+    <!-- 标题行 -->
+
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/linearLayout_center1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="@dimen/circle_more_height"
+            android:background="@color/default_bg_up"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp" >
+
+            <EditText
+                android:id="@+id/tv_updatepwd_oldpwd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="31dp"
+                android:layout_marginTop="4dp"
+                android:layout_toLeftOf="@+id/tv_updatepwd_correct"
+                android:background="@null"
+                android:drawableLeft="@drawable/centeredit_lock"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:hint="旧密码"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/iv_updatepwd_delete"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignRight="@+id/tv_updatepwd_oldpwd"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:contentDescription="@string/image_description"
+                android:src="@drawable/delete" />
+
+            <ImageView
+                android:id="@id/tv_updatepwd_correct"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/mv_preview_play"
+                android:contentDescription="@string/image_description"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/linearLayout_center2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="@dimen/circle_more_height"
+            android:background="@color/default_bg_up"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp" >
+
+            <EditText
+                android:id="@+id/tv_updatepwd_newpwd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="31dp"
+                android:layout_marginTop="4dp"
+                android:drawableLeft="@drawable/centeredit_lock"
+                android:drawablePadding="@dimen/default_gap"
+                android:layout_toLeftOf="@+id/tv_updatepwd_correct1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="新密码"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/iv_updatepwd_delete1"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignRight="@+id/tv_updatepwd_newpwd"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/delete" />
+
+            <ImageView
+                android:id="@id/tv_updatepwd_correct1"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/mv_preview_play"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/usercenter_background1"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="@color/default_bg_up"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp" >
+
+            <EditText
+                android:id="@+id/tv_updatepwd_newpwd2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="31dp"
+                android:layout_marginTop="4dp"
+                android:drawableLeft="@drawable/centeredit_lock"
+                android:drawablePadding="@dimen/default_gap"
+                android:layout_toLeftOf="@+id/tv_updatepwd_correct2"
+                android:background="@null"
+                android:hint="再次输入新密码"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/iv_updatepwd_delete2"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignRight="@+id/tv_updatepwd_newpwd2"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/delete" />
+
+            <ImageView
+                android:id="@id/tv_updatepwd_correct2"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/mv_preview_play"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

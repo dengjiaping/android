@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/default_gap" >
+
+    <TextView
+        android:id="@+id/catalog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/default_grey_text_bg"
+        android:paddingLeft="@dimen/default_big_gap"
+        android:paddingTop="@dimen/to_small_gap"
+        android:text="M"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/default_editsize_small" />
+
+    <!-- 头像 -->
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="@dimen/default_photo_size"
+        android:layout_height="@dimen/default_photo_size"
+        android:layout_below="@+id/catalog"
+        android:layout_marginLeft="@dimen/default_big_gap"
+        android:layout_marginRight="@dimen/small_gap"
+        android:layout_marginTop="@dimen/default_gap"/>
+
+    <!-- 名称 -->
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/photo"
+        android:layout_marginLeft="@dimen/default_gap"
+        android:layout_marginRight="@dimen/default_big_gap"
+        android:singleLine="true"
+        android:layout_toRightOf="@+id/photo"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_medium" />
+
+    <!-- 签名 -->
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/photo"
+        android:layout_alignLeft="@+id/name"
+        android:layout_marginRight="@dimen/default_big_gap"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="@dimen/text_pretty" />
+
+</RelativeLayout>

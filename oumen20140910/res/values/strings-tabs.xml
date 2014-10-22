@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="firstAction">com.itita.first</string>
+    <string name="secondAction">com.itita.second</string>
+    <string name="thirdAction">com.itita.third</string>
+    <string name="fourthAction">com.itita.fourth</string>
+    <string name="fifthAction">com.itita.fifth</string>
+    <string name="fiveAction">com.itita.fifth</string>
+</resources>

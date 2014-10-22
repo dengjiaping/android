@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/header_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/transparent_half"
+        android:paddingLeft="@dimen/padding_large"
+        android:paddingRight="@dimen/padding_large"
+        android:paddingTop="@dimen/padding_large"
+        android:paddingBottom="@dimen/padding_super"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_alignParentLeft="true"
+            android:singleLine="true"
+            android:layout_toLeftOf="@+id/header_pingjia"
+            android:paddingRight="@dimen/padding_large"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_medium" />
+
+        <TextView
+            android:id="@+id/header_pingjia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_alignParentRight="true"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_pretty" />
+    </RelativeLayout>
+
+    <widget.viewpager.CirclePageIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:padding="@dimen/padding_micro" />
+
+</FrameLayout>

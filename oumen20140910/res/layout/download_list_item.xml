@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:padding="@dimen/padding_default">
+    
+    <ImageButton
+        android:id="@+id/control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/padding_default" />
+    
+	<TextView
+	    android:id="@+id/title"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="@dimen/text_medium"
+	    android:textColor="@color/black"
+	    android:layout_toRightOf="@+id/control" />
+	
+	<ProgressBar
+	    android:id="@+id/progress"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/title"
+	    android:layout_alignLeft="@+id/title"
+	    android:layout_marginTop="@dimen/padding_default" 
+	    android:indeterminate="false"/>
+	
+	<TextView
+	    android:id="@+id/progress_info"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="@dimen/text_micro"
+	    android:textColor="@color/black"
+	    android:gravity="center"
+	    android:layout_alignLeft="@+id/progress"
+	    android:layout_alignRight="@+id/progress"
+	    android:layout_alignTop="@+id/progress"
+	    android:layout_alignBottom="@+id/progress" />
+</RelativeLayout>

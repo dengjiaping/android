@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_up"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/nav_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:layout_marginBottom="@dimen/default_gap"
+        android:layout_marginLeft="@dimen/default_gap"
+        android:layout_marginRight="@dimen/default_gap"
+        android:gravity="center"
+        android:textColor="@color/content"
+        android:textSize="@dimen/dialog_title_text_size"
+        android:text="提示"
+        android:textStyle="bold" />
+    
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bold_divider_height"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:background="@color/bold_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FF7E7E7E" >
+
+        <Button
+            android:id="@+id/positive"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/default_middle_gap"
+            android:paddingBottom="@dimen/default_middle_gap"
+            android:text="@string/ok"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/dialog_title_text_size"
+            android:background="@drawable/dialog_selector" />
+
+        <Button
+            android:id="@+id/negative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1px"
+            android:paddingTop="@dimen/default_middle_gap"
+            android:paddingBottom="@dimen/default_middle_gap"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/dialog_title_text_size"
+            android:background="@drawable/dialog_selector" />
+    </LinearLayout>
+
+</LinearLayout>

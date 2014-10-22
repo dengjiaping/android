@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/head_photo"
+                android:layout_width="@dimen/default_photo_size"
+                android:layout_height="@dimen/default_photo_size"
+                android:layout_marginBottom="@dimen/small_gap"
+                android:layout_marginLeft="@dimen/default_gap"
+                android:layout_marginRight="@dimen/default_gap"
+                android:layout_marginTop="@dimen/default_gap"
+                android:src="@drawable/rect_user_photo" />
+
+            <TextView
+                android:id="@+id/groupitem_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/head_photo"
+                android:layout_toRightOf="@+id/head_photo"
+                android:singleLine="true"
+                android:textColor="@color/text_highlight"
+                android:textSize="@dimen/chat_editsize"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/groupitem_nickname"
+                android:layout_alignBottom="@+id/groupitem_nickname"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/default_gap"
+                android:singleLine="true"
+                android:textColor="@color/chat_textview"
+                android:textSize="@dimen/chat_editsize_small" />
+
+            <TextView
+                android:id="@+id/groupitem_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/groupitem_nickname"
+                android:layout_below="@+id/groupitem_nickname"
+                android:layout_marginBottom="@dimen/small_gap"
+                android:layout_marginRight="@dimen/default_gap"
+                android:textColor="@color/content"
+                android:textSize="@dimen/chat_editsize_small" />
+
+            <GridView
+                android:id="@+id/grid"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_alignLeft="@+id/groupitem_nickname"
+                android:layout_below="@+id/groupitem_content"
+                android:layout_marginBottom="@dimen/small_gap"
+                android:layout_toRightOf="@+id/head_photo"
+                android:columnWidth="100dp"
+                android:horizontalSpacing="@dimen/padding_medium"
+                android:listSelector="@null"
+                android:numColumns="3"
+                android:verticalSpacing="@dimen/padding_medium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_groupitem_time"
+                android:layout_marginLeft="@dimen/default_gap"
+                android:layout_marginRight="@dimen/default_gap"
+                android:background="@drawable/oumen_circle_message_tip_bg"
+                android:orientation="vertical" >
+
+		        <TextView
+		            android:id="@+id/enjoy_description"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_marginTop="-6dp"
+		            android:layout_marginLeft="@dimen/padding_micro"
+		            android:textSize="@dimen/chat_editsize_small"
+		            android:gravity="center_vertical"/>
+
+                <View
+                    android:id="@+id/line_behind"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_one_px"
+                    android:background="@color/default_bg_up" />
+
+                <TextView
+                    android:id="@+id/show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/peerscircle_isprivate"
+                    android:drawablePadding="2dp"
+                    android:padding="@dimen/small_gap"
+                    android:text="对任何人都公开"
+                    android:textColor="@color/chat_textview"
+                    android:textSize="@dimen/chat_editsize_small"
+                    android:visibility="gone" />
+
+                <ListView
+                    android:id="@+id/comments"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/default_bg"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:divider="@null"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:paddingBottom="@dimen/small_gap" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/iv_groupitem_type"
+                android:layout_width="@dimen/default_photo_size"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/head_photo"
+                android:layout_alignRight="@+id/head_photo"
+                android:layout_below="@+id/head_photo"
+                android:background="@color/oumen_circle_share"
+                android:padding="@dimen/default_login_lineheight2"
+                android:text="分享"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_editsize_tosmall" />
+
+            <RelativeLayout
+                android:id="@+id/rl_groupitem_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/groupitem_nickname"
+                android:layout_below="@+id/grid"
+                android:layout_marginRight="@dimen/default_gap" >
+
+                <TextView
+                    android:id="@+id/groupitem_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:singleLine="true"
+                    android:textColor="@color/chat_textview"
+                    android:textSize="@dimen/chat_editsize_small" />
+
+                <ImageView
+                    android:id="@+id/iv_groupimage_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/oumen_circle_more_btnselector" />
+
+                <TextView
+                    android:id="@+id/groupitem_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/groupitem_time"
+                    android:paddingLeft="@dimen/small_gap"
+                    android:singleLine="true"
+                    android:text="删除"
+                    android:textColor="@color/text_highlight"
+                    android:textSize="@dimen/chat_editsize_small" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_send_messge"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/popup_send_content_height"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="#e8e8e8"
+        android:padding="@dimen/small_gap" >
+
+        <EditText
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/send"
+            android:background="@drawable/login_edit_normal"
+            android:hint="回复..."
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/small_gap"
+            android:background="@drawable/chat_send_btn"
+            android:paddingLeft="@dimen/default_gap"
+            android:paddingRight="@dimen/default_gap"
+            android:text="@string/send"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</RelativeLayout>

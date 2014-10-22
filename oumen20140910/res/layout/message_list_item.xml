@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_medium" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/msg_list_item_left_icon_size"
+        android:layout_height="@dimen/msg_list_item_left_icon_size"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/padding_large"
+        android:contentDescription="@string/image_description" />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignRight="@+id/icon"
+        android:layout_alignTop="@+id/icon"
+        android:background="@drawable/count_bg"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_micro"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/nav_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/icon"
+        android:layout_marginTop="@dimen/padding_medium"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toRightOf="@+id/icon"
+        android:drawablePadding="@dimen/padding_medium"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/default_nav_textsize" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/icon"
+        android:layout_marginBottom="@dimen/padding_medium"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toRightOf="@+id/icon"
+        android:drawablePadding="@dimen/padding_medium"
+        android:singleLine="true"
+        android:textColor="@color/text_grey"
+        android:textSize="@dimen/text_medium" />
+
+    <ImageView
+        android:id="@+id/button"
+        android:layout_width="@dimen/msg_list_item_right_icon_size"
+        android:layout_height="@dimen/msg_list_item_right_icon_size"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/image_description"
+        android:src="@drawable/addfriend" />
+
+</RelativeLayout>

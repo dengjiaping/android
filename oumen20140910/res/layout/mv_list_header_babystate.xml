@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/mv_list_header_bg"
+    android:paddingBottom="@dimen/padding_super" >
+
+    <ImageView
+        android:id="@+id/state_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/padding_super"
+        android:layout_marginRight="@dimen/padding_super"
+        android:layout_marginTop="@dimen/padding_super"
+        android:contentDescription="@string/image_description"
+        android:src="@drawable/mv_header_chusheng" />
+
+    <TextView
+        android:id="@+id/month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/state_tag"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/padding_small"
+        android:background="@drawable/header_month"
+        android:gravity="center"
+        android:text="03"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_super"/>
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/state_tag"
+        android:layout_margin="@dimen/padding_small"
+        android:layout_toLeftOf="@+id/month"
+        android:background="@drawable/header_year"
+        android:gravity="center"
+        android:text="03"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_super"/>
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/state_tag"
+        android:layout_margin="@dimen/padding_small"
+        android:layout_toRightOf="@+id/month"
+        android:background="@drawable/header_day"
+        android:gravity="center"
+        android:text="03"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_super"/>
+
+    <ImageView
+        android:id="@+id/qita_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/padding_super"
+        android:layout_marginRight="@dimen/padding_super"
+        android:layout_marginTop="@dimen/padding_super"
+        android:padding="@dimen/padding_super"
+        android:contentDescription="@string/image_description"
+        android:src="@drawable/mv_header_qita"
+        android:visibility="gone" />
+
+</RelativeLayout>

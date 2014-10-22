@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/default_container_bg" >
+
+    <FrameLayout
+        android:id="@+id/framlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_tobig_gap"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/small_gap" >
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/default_container_bg"
+            android:paddingBottom="@dimen/small_gap"
+            android:paddingLeft="27dp"
+            android:paddingTop="@dimen/small_gap"
+            android:textColor="@color/default_text_bg"
+            android:textSize="@dimen/chat_editsize" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/element_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/framlayout"
+        android:layout_marginLeft="@dimen/default_tobig_gap"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/default_gap"
+        android:paddingLeft="@dimen/default_tobig_gap"
+        android:paddingRight="@dimen/default_big_gap"
+        android:paddingTop="@dimen/default_gap" >
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/headphoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/default_big_gap"
+        android:layout_marginTop="@dimen/default_middle_gap"
+        android:contentDescription="@string/image_description"
+        android:src="@drawable/huodong_detail_address" />
+
+</RelativeLayout>

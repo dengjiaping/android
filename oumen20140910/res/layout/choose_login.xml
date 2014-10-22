@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_loginchoose"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_choose_bg">
+    
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/big_photo_size"
+        android:src="@drawable/logo_login"
+        android:contentDescription="@string/image_description"/>
+
+    <TextView
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/login"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:gravity="center_vertical"
+        android:background="@drawable/choose_login_btnselector"
+        android:drawableLeft="@drawable/choose_register"
+        android:drawablePadding="@dimen/small_gap"
+        android:paddingBottom="@dimen/small_gap"
+        android:paddingTop="@dimen/small_gap"
+        android:text="@string/register"
+        android:textColor="@color/login_choose_btn_text"
+        android:textSize="@dimen/default_nav_textsize" />
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/register"
+        android:layout_below="@+id/logo"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/choose_login_btnselector"
+        android:drawableLeft="@drawable/choose_login"
+        android:drawablePadding="@dimen/small_gap"
+        android:paddingBottom="@dimen/small_gap"
+        android:paddingTop="@dimen/small_gap"
+        android:text="@string/nav_login_btn"
+        android:textColor="@color/login_choose_btn_text"
+        android:textSize="@dimen/default_nav_textsize" />
+
+</RelativeLayout>

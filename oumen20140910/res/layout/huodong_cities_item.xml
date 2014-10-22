@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_gravity="center" >
+
+    <TextView
+        android:id="@+id/catalog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/default_grey_text_bg"
+        android:paddingLeft="@dimen/default_big_gap"
+        android:paddingTop="@dimen/to_small_gap"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/default_editsize_small" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_large"
+        android:paddingRight="35dp"
+        android:paddingTop="@dimen/padding_large"
+        android:paddingBottom="@dimen/padding_large"
+        android:background="@drawable/white_and_grey_selector"
+        android:singleLine="true"
+        android:textColor="@color/calander_title_text"
+        android:textSize="@dimen/text_pretty" />
+</LinearLayout>

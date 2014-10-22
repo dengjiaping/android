@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_grey_text_bg"
+    android:orientation="vertical" >
+
+    <com.oumen.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:background="@color/white"
+        android:hint="@string/nickname"
+        android:padding="@dimen/default_middle_gap"
+        android:textColor="@color/default_text_bg"
+        android:textSize="@dimen/default_editsize_big" />
+
+    <EditText
+        android:id="@+id/sign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:background="@color/white"
+        android:hint="@string/nav_babysign_title"
+        android:maxLength="38"
+        android:padding="@dimen/default_middle_gap"
+        android:textColor="@color/default_text_bg"
+        android:textSize="@dimen/default_editsize_big"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_one_px"
+            android:background="@color/login_line" />
+
+        <TextView
+            android:id="@+id/boy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/oumen_share_choose"
+            android:drawablePadding="@dimen/default_gap"
+            android:padding="@dimen/default_big_gap"
+            android:text="@string/boy"
+            android:textColor="@color/text_highlight"
+            android:textSize="@dimen/default_editsize_big" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_one_px"
+            android:background="@color/login_line" />
+
+        <TextView
+            android:id="@+id/girl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/oumen_share_unchoose"
+            android:drawablePadding="@dimen/default_gap"
+            android:padding="@dimen/default_big_gap"
+            android:text="@string/girl"
+            android:textColor="@color/content"
+            android:textSize="@dimen/default_editsize_big" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_one_px"
+            android:background="@color/login_line" />
+    </LinearLayout>
+
+</LinearLayout>
