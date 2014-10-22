@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/padding_large" >
+
+    <TextView
+        android:id="@+id/rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/padding_large"
+        android:textColor="@color/detail_orange"
+        android:textSize="32sp" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="1px"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/describe"
+        android:layout_alignTop="@+id/describe"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/rate"
+        android:background="@color/default_line_bg" />
+
+    <TextView
+        android:id="@+id/describe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/padding_large"
+        android:layout_toRightOf="@+id/line"
+        android:maxLines="2"
+        android:textColor="@color/detail_apply_grey_text"
+        android:textSize="@dimen/text_medium" />
+
+</RelativeLayout>

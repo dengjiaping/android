@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="260dp"
+    android:layout_height="match_parent"
+    android:background="@color/default_left_bg" >
+
+    <ImageView
+        android:id="@+id/sliding_photo"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/home_left_headphoto_bg"
+        android:contentDescription="@string/image_description"
+        android:padding="@dimen/padding_medium"
+        android:src="@drawable/round_user_photo" />
+
+    <TextView
+        android:id="@+id/sliding_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sliding_photo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/default_big_gap"
+        android:layout_marginLeft="@dimen/default_gap"
+        android:layout_marginRight="@dimen/default_gap"
+        android:layout_marginTop="@dimen/default_big_gap"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_nav_textsize" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sliding_nickname"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/left_line"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_gap" />
+
+        <LinearLayout
+            android:id="@+id/sliding_useractivity_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/left_selector"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/leftnav_user_activity_selector"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/default_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/default_gap"
+                android:text="@string/user_activity"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_editsize_big" />
+
+            <View
+                android:id="@+id/sliding_usercenter_tip"
+                android:layout_width="@dimen/padding_medium"
+                android:layout_height="@dimen/padding_medium"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_gap"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/count_bg"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/left_line"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:id="@+id/sliding_message_center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/left_selector"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/leftnav_circle_selector"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/default_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/default_gap"
+                android:text="@string/tab_messages"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_editsize_big" />
+
+            <TextView
+                android:id="@+id/sliding_message_center_tip"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_gap"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/count_bg"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_micro" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/left_line"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_gap" />
+
+        <LinearLayout
+            android:id="@+id/sliding_mv_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/left_selector"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/leftnav_mv_selector"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/default_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/default_gap"
+                android:text="@string/module_title_mv"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_editsize_big" />
+
+            <View
+                android:id="@+id/sliding_mv_tip"
+                android:layout_width="@dimen/padding_medium"
+                android:layout_height="@dimen/padding_medium"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_gap"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/count_bg"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/left_line"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_gap" />
+
+        <LinearLayout
+            android:id="@+id/sliding_quan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/left_selector"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/leftnav_circle_selector"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/default_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/default_gap"
+                android:text="@string/module_title_quan"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_editsize_big" />
+
+            <TextView
+                android:id="@+id/sliding_circle_tip"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_gap"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/count_bg"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_micro" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/left_line"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_gap" />
+
+        <LinearLayout
+            android:id="@+id/sliding_setting_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/left_selector"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/leftnav_setting_selector"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/default_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/default_gap"
+                android:text="@string/setting"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_editsize_big" />
+
+            <View
+                android:id="@+id/sliding_setting_tip"
+                android:layout_width="@dimen/padding_medium"
+                android:layout_height="@dimen/padding_medium"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_gap"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/count_bg"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/left_line"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_gap" />
+
+        <LinearLayout
+            android:id="@+id/sliding_location_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/left_selector"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/leftnav_user_activity_selector"
+                android:drawablePadding="@dimen/default_gap"
+                android:gravity="center_vertical"
+                android:paddingBottom="@dimen/default_gap"
+                android:paddingLeft="@dimen/default_big_gap"
+                android:paddingTop="@dimen/default_gap"
+                android:text="城市切换"
+                android:textColor="@color/white"
+                android:textSize="@dimen/default_editsize_big" />
+
+            <View
+                android:id="@+id/sliding_location_tip"
+                android:layout_width="@dimen/padding_medium"
+                android:layout_height="@dimen/padding_medium"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_gap"
+                android:layout_marginRight="100dp"
+                android:background="@drawable/count_bg"
+                android:gravity="center"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/left_line"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_gap"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sliding_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/left_city_btnselector"
+        android:drawableLeft="@drawable/center_location"
+        android:drawableRight="@drawable/center_arrow"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/default_gap"
+        android:paddingLeft="@dimen/default_big_gap"
+        android:paddingRight="@dimen/padding_super"
+        android:paddingTop="@dimen/default_gap"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_pretty" />
+</RelativeLayout>

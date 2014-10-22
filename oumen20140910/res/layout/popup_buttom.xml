@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@color/transparent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/top_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:layout_marginTop="@dimen/padding_large"
+        android:background="@drawable/popup_buttom_top_btnselector"
+        android:padding="@dimen/padding_large"
+        android:text="手机找回密码"
+        android:textColor="@color/default_bg"
+        android:textSize="@dimen/text_medium" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:background="@color/divider" />
+
+    <Button
+        android:id="@+id/buttom_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/padding_small"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:background="@drawable/popup_buttom_buttom_btnselector"
+        android:padding="@dimen/padding_large"
+        android:text="邮箱找回密码"
+        android:textColor="@color/default_bg"
+        android:textSize="@dimen/text_medium" />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/padding_super"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:background="@drawable/popup_buttom_btnselector"
+        android:padding="@dimen/padding_large"
+        android:text="取消"
+        android:textColor="@color/default_bg"
+        android:textSize="@dimen/text_medium"
+        android:textStyle="bold" />
+
+</LinearLayout>

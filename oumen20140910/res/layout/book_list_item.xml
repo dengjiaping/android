@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_small"
+        android:textColor="@color/text_grey"
+        android:padding="@dimen/padding_small"
+        android:visibility="gone" />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_bg"
+    	android:paddingBottom="@dimen/padding_medium">
+
+		<FrameLayout
+		    android:id="@+id/top_left_container"
+		    android:layout_width="165dp"
+		    android:layout_height="@dimen/book_list_top_bar_height"
+		    android:paddingLeft="@dimen/padding_medium"
+		    android:paddingRight="@dimen/padding_medium"
+		    android:paddingTop="@dimen/padding_micro"
+		    android:paddingBottom="@dimen/padding_micro">
+	
+			<TextView
+			    android:id="@+id/title1"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="top|center_horizontal"
+			    android:textSize="@dimen/text_medium"
+			    android:textColor="@color/book_text"
+			    android:text="@string/book_title1" />
+			
+			<LinearLayout
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:layout_gravity="bottom|center_horizontal"
+			    android:gravity="center_horizontal">
+			    
+			    <TextView
+			        android:id="@+id/year"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_large"
+			        android:textColor="@color/book_text"
+			        android:textStyle="bold" />
+			    
+			    <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_small"
+			        android:textColor="@color/text_grey"
+			        android:text="@string/book_title_year" />
+			    
+			    <TextView
+			        android:id="@+id/month"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_large"
+			        android:textColor="@color/book_text"
+			        android:textStyle="bold" />
+			    
+			    <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_small"
+			        android:textColor="@color/text_grey"
+			        android:text="@string/book_title_month" />
+			    
+			    <TextView
+			        android:id="@+id/day"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_large"
+			        android:textColor="@color/book_text"
+			        android:textStyle="bold" />
+			    
+			    <TextView
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:textSize="@dimen/text_small"
+			        android:textColor="@color/text_grey"
+			        android:text="@string/book_title_day" />
+			</LinearLayout>
+		</FrameLayout>
+		
+		<View
+		    android:layout_width="1px"
+		    android:layout_height="wrap_content"
+		    android:background="@color/divider"
+		    android:layout_alignTop="@+id/top_left_container"
+		    android:layout_alignBottom="@+id/top_left_container"
+		    android:layout_toRightOf="@+id/top_left_container" />
+		
+		<TextView
+		    android:layout_width="match_parent"
+		    android:layout_height="@dimen/book_list_top_bar_height"
+		    android:layout_toRightOf="@+id/top_left_container"
+		    android:paddingTop="@dimen/padding_micro"
+		    android:paddingBottom="@dimen/padding_micro"
+		    android:paddingLeft="@dimen/padding_medium"
+		    android:paddingRight="@dimen/padding_small"
+		    android:gravity="center_vertical"
+		    android:textSize="@dimen/text_small"
+		    android:textColor="@color/text_grey"
+		    android:text="@string/book_tip"
+		    android:lines="3"
+		    android:ellipsize="end" />
+		
+		<View
+		    android:layout_width="match_parent"
+		    android:layout_height="1px"
+		    android:background="@color/divider"
+		    android:layout_below="@+id/top_left_container" />
+		
+		<ImageView
+		    android:id="@+id/icon"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_margin="@dimen/padding_medium"
+		    android:layout_below="@+id/top_left_container"
+		    android:src="@drawable/icon_baby_book_rect"
+		    android:contentDescription="@string/image_description" />
+		
+		<TextView
+		    android:id="@+id/nav_title"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_toRightOf="@+id/icon"
+		    android:layout_below="@+id/top_left_container"
+		    android:layout_marginTop="@dimen/padding_medium"
+		    android:layout_marginRight="@dimen/padding_medium"
+		    android:gravity="center_horizontal"
+		    android:textSize="@dimen/text_medium"
+		    android:textColor="@color/book_text"
+		    android:textStyle="bold"
+		    android:text="@string/book_title2"
+		    android:singleLine="true"
+		    android:ellipsize="end" />
+		
+		<TextView
+		    android:id="@+id/content"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_toRightOf="@+id/icon"
+		    android:layout_below="@+id/nav_title"
+		    android:textSize="@dimen/text_pretty"
+		    android:textColor="@color/text_grey"
+		    android:text="@string/book_tip"
+		   	android:lines="3"
+		    android:ellipsize="end" />
+    </RelativeLayout>
+</LinearLayout>

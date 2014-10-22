@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/circle_more_height"
+    android:background="@drawable/oumen_circle_more_pop_bg"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_large" >
+
+    <Button
+        android:id="@+id/enjoy"
+        android:layout_width="@dimen/circle_more_item_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/padding_small"
+        android:layout_weight="1"
+        android:background="@drawable/oumen_circle_pop_btnselector"
+        android:drawableLeft="@drawable/peerscircle_favourbtnselector"
+        android:padding="@dimen/small_gap"
+        android:text="@string/enjoy"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_editsize" />
+
+    <Button
+        android:id="@+id/comment"
+        android:layout_width="@dimen/circle_more_item_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/padding_small"
+        android:layout_weight="1"
+        android:background="@drawable/oumen_circle_pop_btnselector"
+        android:drawableLeft="@drawable/peerscircle_commentbtnselector"
+        android:padding="@dimen/small_gap"
+        android:text="@string/comment"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_editsize" />
+
+    <Button
+        android:id="@+id/share"
+        android:layout_width="@dimen/circle_more_item_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/oumen_circle_pop_btnselector"
+        android:drawableLeft="@drawable/peerscircle_morebtnselector"
+        android:padding="@dimen/small_gap"
+        android:text="@string/share"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_editsize" />
+
+</LinearLayout>

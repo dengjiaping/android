@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/default_gap"
+    android:layout_marginLeft="@dimen/default_gap"
+    android:layout_marginRight="@dimen/default_tobig_gap"
+    android:layout_marginTop="@dimen/default_gap"
+    android:textColor="@color/blue_apply"
+    android:textSize="@dimen/chat_editsize"
+    android:textIsSelectable="true" />

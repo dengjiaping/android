@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/padding_large" >
+
+    <com.oumen.widget.image.shape.RoundRectangleImageView
+        android:id="@+id/photo"
+        android:layout_width="@dimen/activitys_list_item_pic_size"
+        android:layout_height="@dimen/activitys_list_item_pic_size"
+        android:layout_margin="@dimen/padding_large"
+        android:contentDescription="@string/image_description"
+        android:src="@drawable/pic_default" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/padding_large"
+        android:layout_marginTop="@dimen/padding_large"
+        android:layout_toRightOf="@+id/photo"
+        android:singleLine="true"
+        android:textColor="@color/black_start"
+        android:textSize="@dimen/text_medium" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_marginRight="@dimen/padding_large"
+        android:layout_marginTop="@dimen/padding_micro"
+        android:layout_toRightOf="@+id/photo"
+        android:drawableLeft="@drawable/user_huodong_location"
+        android:drawablePadding="@dimen/padding_micro"
+        android:maxLines="2"
+        android:text="活动地址"
+        android:textColor="@color/default_grey_text"
+        android:textSize="@dimen/text_small" />
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/photo"
+        android:layout_marginRight="@dimen/padding_large"
+        android:layout_marginTop="@dimen/padding_micro"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small"
+        android:paddingTop="@dimen/padding_small"
+        android:textColor="@color/detail_orange"
+        android:textSize="@dimen/text_small" />
+
+    <TextView
+        android:id="@+id/distence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/padding_large"
+        android:layout_marginTop="@dimen/padding_micro"
+        android:layout_toRightOf="@+id/photo"
+       	android:layout_alignBottom="@+id/photo"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small"
+        android:paddingTop="@dimen/padding_small"
+        android:textColor="@color/default_grey_text"
+        android:textSize="@dimen/text_small" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/padding_large"
+        android:drawableLeft="@drawable/huodong_type_flag"
+        android:drawablePadding="@dimen/padding_small"
+        android:layout_marginTop="@dimen/padding_micro"
+        android:layout_toRightOf="@+id/distence"
+        android:layout_alignBottom="@+id/photo"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small"
+        android:paddingTop="@dimen/padding_small"
+        android:textColor="@color/default_grey_text"
+        android:textSize="@dimen/text_small" />
+
+</RelativeLayout>
