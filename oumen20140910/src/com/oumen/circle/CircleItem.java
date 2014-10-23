@@ -1,9 +1,12 @@
 package com.oumen.circle;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Spannable;
@@ -102,6 +105,7 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 		txtContent = (TextView) findViewById(R.id.content);
 		txtTime = (TextView) findViewById(R.id.time);
 		txtLookNum = (TextView) findViewById(R.id.looknum);
+		txtLookNum.setVisibility(View.GONE);
 
 		imgMore = (ImageView) findViewById(R.id.more);
 		imgMore.setOnClickListener(this);
@@ -111,9 +115,10 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 		// 图片信息
 		gridImages = (GridView) findViewById(R.id.grid);
 		gridImages.setAdapter(adapterGridImage);
+		gridImages.setVisibility(View.GONE);
 
 		containerMessages = (ViewGroup) findViewById(R.id.ll_groupitem_message);
-
+		containerMessages.setVisibility(View.GONE);
 		// 显示有多少人赞了
 		txtEnjoyDescription = (TextView) findViewById(R.id.enjoy_description);
 		txtEnjoyDescription.setVisibility(View.GONE);
@@ -141,28 +146,13 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 		hostClickListener = listener;
 	}
 
-	public void update() {
+	public void update(boolean scrollFlag) {
 		CircleItemData itemData = (CircleItemData) getTag();
 		CircleUserMsg info = itemData.groupData;
 
 		viewMore.setData(itemData);
-
-		int isFavour = info.getIsprise();
-		if (isFavour == 0) {
-			viewMore.setEnjoyText(R.string.enjoy, R.drawable.oumen_circle_zan, R.drawable.oumen_circle_more_pop_btn_bg);
-		}
-		else if (isFavour == 1) {
-			viewMore.setEnjoyText(R.string.cancel, R.drawable.oumen_circle_zan_click, R.drawable.oumen_circle_more_pop_btn_click_bg);
-		}
-
-		// 设置头像
-		if (info.getInfo().hasHeadPhoto()) {
-			ImageLoader.getInstance().displayImage(info.getInfo().getHeadPhotoUrl(App.DEFAULT_PHOTO_SIZE), imgPhoto, App.OPTIONS_HEAD_RECT);
-		}
-		else {
-			imgPhoto.setImageResource(R.drawable.rect_user_photo);
-		}
 		imgPhoto.setTag(itemData);
+		txtDelete.setTag(itemData);
 
 		// 设置昵称
 		txtNickname.setText(info.getInfo().getNickname());
@@ -176,6 +166,7 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 //			txtLookNum.setVisibility(View.GONE);
 //			txtLookNum.setText(info.getLookNum() + "人阅读");
 //		}
+
 		// 设置模式
 		int mode = info.getInfo().getModes();
 		if (CircleUserBasicMsg.MODE_EXCHANGE == mode) {
@@ -197,7 +188,7 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 		else {
 			txtDelete.setVisibility(View.GONE);
 		}
-		txtDelete.setTag(itemData);
+
 		// 设置内容
 		final String content = info.getInfo().getContent();
 		if (content.length() <= 100) {
@@ -250,6 +241,39 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 			tempBuilder.setSpan(tempSpan, content.length(), content.length() + "\n收起".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			tempBuilder = App.SMALLBIAOQING.convert(getContext(), tempBuilder, biaoqingIconSize);
 		}
+		
+		txtDistance.setVisibility(View.GONE);//TODO 距离隐藏
+//		txtDistance.setText(info.getInfo().getDistance() + "km");
+
+		//===============================如果正在滚动就不加载图片=================================
+		if (scrollFlag) {
+			return;
+		}
+
+		int isFavour = info.getIsprise();
+		if (isFavour == 0) {
+			viewMore.setEnjoyText(R.string.enjoy, R.drawable.oumen_circle_zan, R.drawable.oumen_circle_more_pop_btn_bg);
+		}
+		else if (isFavour == 1) {
+			viewMore.setEnjoyText(R.string.cancel, R.drawable.oumen_circle_zan_click, R.drawable.oumen_circle_more_pop_btn_click_bg);
+		}
+
+		File cache = ImageLoader.getInstance().getDiskCache().get(info.getInfo().getHeadPhotoUrl(App.DEFAULT_PHOTO_SIZE));
+		if (cache != null && cache.exists()) {
+			Bitmap pic = BitmapFactory.decodeFile(cache.getAbsolutePath());
+			pic = ImageTools.clip2square(pic);
+			imgPhoto.setImageBitmap(pic);
+		}
+		else {
+			// 设置头像
+			if (info.getInfo().hasHeadPhoto()) {
+				ImageLoader.getInstance().displayImage(info.getInfo().getHeadPhotoUrl(App.DEFAULT_PHOTO_SIZE), imgPhoto, App.OPTIONS_HEAD_RECT);
+			}
+			else {
+				imgPhoto.setImageResource(R.drawable.rect_user_photo);
+			}
+		}
+
 		// ===========================设置图片==========================================
 		if (info.getInfo().photos.size() == 0) {
 			gridImages.setVisibility(View.GONE);
@@ -274,24 +298,24 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 
 		// ===============================获取评论信息==================================
 		int commentCount = info.comments.size();
-//		if (commentCount > 0) {
-//			long time = System.currentTimeMillis();
-//			// 设置评论显示
-//			containerMessages.setVisibility(View.VISIBLE);
-//			lstComment.setVisibility(View.VISIBLE);
-//			lstComment.removeAllViews();
-//
-//			for (int i = 0; i < commentCount; i++) {
-//				CircleItemData cmtItemData = new CircleItemData();
-//				final CommentItem item = new CommentItem(getContext());
-//				item.setOnClickListener(hostClickListener);
-//				item.setTag(cmtItemData);
-//				cmtItemData.groupIndex = itemData.groupIndex;
-//				cmtItemData.groupData = itemData.groupData;
-//				cmtItemData.commentIndex = i;
-//				cmtItemData.commentData = info.comments.get(i);
-//				final boolean isLast = i == (commentCount - 1);
-//				item.update();
+		if (commentCount > 0) {
+			long time = System.currentTimeMillis();
+			// 设置评论显示
+			containerMessages.setVisibility(View.VISIBLE);
+			lstComment.setVisibility(View.VISIBLE);
+			lstComment.removeAllViews();
+
+			for (int i = 0; i < commentCount; i++) {
+				CircleItemData cmtItemData = new CircleItemData();
+				final CommentItem item = new CommentItem(getContext());
+				item.setOnClickListener(hostClickListener);
+				item.setTag(cmtItemData);
+				cmtItemData.groupIndex = itemData.groupIndex;
+				cmtItemData.groupData = itemData.groupData;
+				cmtItemData.commentIndex = i;
+				cmtItemData.commentData = info.comments.get(i);
+				final boolean isLast = i == (commentCount - 1);
+				item.update();
 //				item.post(new Runnable() {
 //
 //					@Override
@@ -301,14 +325,15 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 //						item.setLayoutParams(params);
 //					}
 //				});
-//				lstComment.addView(item);
-//			}
-//			ELog.e("加载评论需要时间：" + (System.currentTimeMillis() - time));
-//		}
-//		else {
+				lstComment.addView(item);
+			}
+			ELog.e("加载评论需要时间：" + (System.currentTimeMillis() - time));
+		}
+		else {
 //			// 设置评论隐藏
+			lstComment.removeAllViews();
 			lstComment.setVisibility(View.GONE);
-//		}
+		}
 		// ===========================设置赞的人数初始化====================================
 		ArrayList<Prise> prises = info.prises;
 		if (prises != null && prises.size() > 0) {
@@ -348,20 +373,20 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 			builder.setSpan(CircleListFragment.SPAN_ENJOY_ICON, 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			txtEnjoyDescription.setText(builder);
 			txtEnjoyDescription.setMovementMethod(LinkMovementMethod.getInstance());
-			txtEnjoyDescription.post(new Runnable() {
-
-				@Override
-				public void run() {
-					ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) txtEnjoyDescription.getLayoutParams();
-					if (txtEnjoyDescription.getLineCount() == 1) {
-						params.height = lineHeight;
-					}
-					else {
-						params.height = lineHeight + (txtEnjoyDescription.getLineCount() - 1) * txtEnjoyDescription.getLineHeight();
-					}
-					txtEnjoyDescription.setLayoutParams(params);
-				}
-			});
+//			txtEnjoyDescription.post(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) txtEnjoyDescription.getLayoutParams();
+//					if (txtEnjoyDescription.getLineCount() == 1) {
+//						params.height = lineHeight;
+//					}
+//					else {
+//						params.height = lineHeight + (txtEnjoyDescription.getLineCount() - 1) * txtEnjoyDescription.getLineHeight();
+//					}
+//					txtEnjoyDescription.setLayoutParams(params);
+//				}
+//			});
 		}
 		else if (prises.size() == 0) {
 			txtEnjoyDescription.setVisibility(View.GONE);
@@ -371,8 +396,6 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 			containerMessages.setVisibility(View.GONE);
 		}
 
-		txtDistance.setVisibility(View.GONE);//TODO 距离隐藏
-//		txtDistance.setText(info.getInfo().getDistance() + "km");
 	}
 
 	@Override

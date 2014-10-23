@@ -15,18 +15,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.ab.view.pullview.AbPullListView;
 import com.oumen.R;
 import com.oumen.TitleBar;
 import com.oumen.android.App;
 import com.oumen.android.BaseFragment;
 import com.oumen.android.peers.OumenShareActivity;
+import com.oumen.android.peers.entity.CircleUserMsg;
 import com.oumen.auth.ShareView;
 import com.oumen.home.LoginConfrim;
 import com.oumen.home.SendMessageView;
 import com.oumen.message.MessageService;
 import com.oumen.tools.ELog;
 import com.oumen.widget.dialog.TwoButtonDialog;
+import com.oumen.widget.list.HSZFooterView;
+import com.oumen.widget.list.HSZHeaderListView;
 
 public class CircleListFragment extends BaseFragment {
 	public static final int REQURST_NOTICE_MESSAGE = 991;
@@ -38,7 +40,8 @@ public class CircleListFragment extends BaseFragment {
 	private Button btnLeft;
 	private Button btnRight;
 
-	protected AbPullListView lstView;
+	protected HSZHeaderListView<CircleUserMsg> lstView;
+	protected HSZFooterView footerView;
 	protected CircleListHeader headerView;
 	protected CircleController controller;
 
@@ -91,6 +94,7 @@ public class CircleListFragment extends BaseFragment {
 		loginConfrim = new LoginConfrim(getActivity());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		getActivity().registerReceiver(receiver, receiverFilter);
@@ -111,23 +115,30 @@ public class CircleListFragment extends BaseFragment {
 		headerView.setClickListener(controller);
 		headerView.update();
 
-		lstView = (AbPullListView) view.findViewById(R.id.list);
-		lstView.addHeaderView(headerView);
+		footerView = new HSZFooterView(container.getContext());
+		footerView.setVisibility(View.GONE);
+
+		lstView = (HSZHeaderListView<CircleUserMsg>) view.findViewById(R.id.list);
+		lstView.setFooterView(footerView, getResources().getDimensionPixelSize(R.dimen.list_footer_height_default));
+		lstView.setHeaderView(headerView);
 		lstView.setDivider(new ColorDrawable(getResources().getColor(R.color.oumen_line)));
 		lstView.setDividerHeight(1);
-		lstView.getFooterView().setFooterProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
-		lstView.getHeaderView().setVisibility(View.GONE);
+		lstView.setEmptyText("没有数据");
+		lstView.setHeaderLoadLine(getResources().getDimensionPixelSize(R.dimen.titlebar_height));
 		lstView.setAdapter(controller.adapter);
-		lstView.setAbOnListViewListener(controller);
-		lstView.setSelector(android.R.color.transparent);
+		lstView.setOnScrollListener(controller);
 		return view;
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
+	public void onViewCreated(final View view, final Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		handler.postDelayed(new Runnable() {
 
-		controller.onViewCreated(view, savedInstanceState);
+			public void run() {
+				controller.onViewCreated(view, savedInstanceState);
+			}
+		}, 500);
 	}
 
 	@Override
@@ -181,8 +192,7 @@ public class CircleListFragment extends BaseFragment {
 			headerView.updateMessage();
 		}
 		else if (requestCode == REQUEST_SHARE) {
-//			lstView.headerLoad();
-			controller.onRefresh();
+			lstView.headerLoad();
 		}
 	}
 

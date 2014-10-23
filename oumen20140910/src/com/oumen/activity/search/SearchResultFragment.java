@@ -62,6 +62,8 @@ public class SearchResultFragment extends BaseFragment implements ActivityHostPr
 
 	private String tempInput = null;
 
+	private boolean firstFlag = true;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -72,6 +74,10 @@ public class SearchResultFragment extends BaseFragment implements ActivityHostPr
 
 		controller = new HuodongListHttpController(this, handler);
 
+		if (firstFlag) {
+			showProgressDialog();
+			firstFlag = false;
+		}
 		String cache = App.CACHE.read(getCacheKey());
 		if (!TextUtils.isEmpty(cache)) {
 			try {
@@ -129,10 +135,17 @@ public class SearchResultFragment extends BaseFragment implements ActivityHostPr
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		if (!adapter.isEmpty()) {
-			adapter.notifyDataSetChanged();
-		}
-		controller.obtainActivities(HuodongTypeUtil.CONDITION_FUZZY_SEARCH, App.INT_UNSET, OrderType.DEFAULT.code(), null, 1);
+		handler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				if (!adapter.isEmpty()) {
+					adapter.notifyDataSetChanged();
+					dismissProgressDialog();
+				}
+				controller.obtainActivities(HuodongTypeUtil.CONDITION_FUZZY_SEARCH, App.INT_UNSET, OrderType.DEFAULT.code(), null, 1);
+			}
+		}, 500);
 	}
 
 	private String getCacheKey() {
@@ -186,6 +199,7 @@ public class SearchResultFragment extends BaseFragment implements ActivityHostPr
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {
 			case HuodongListHttpController.HANDLER_REQUEST_LIST:
+				
 				synchronized (adapter) {
 					if (msg.obj instanceof List<?>) {
 						List<BaseActivityMessage> results = (List<BaseActivityMessage>) msg.obj;
@@ -206,7 +220,7 @@ public class SearchResultFragment extends BaseFragment implements ActivityHostPr
 						}
 					}
 					else {
-						if (!App.PREFS.getLastHistorySearch().equals(tempInput)) {
+						if (tempInput != null && !App.PREFS.getLastHistorySearch().equals(tempInput)) {
 							adapter.data.clear();
 						}
 					}
@@ -214,6 +228,7 @@ public class SearchResultFragment extends BaseFragment implements ActivityHostPr
 				}
 				lstView.stopRefresh();
 				lstView.stopLoadMore();
+				dismissProgressDialog();
 				break;
 		}
 		return false;

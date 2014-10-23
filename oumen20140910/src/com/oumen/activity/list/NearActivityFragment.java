@@ -53,6 +53,7 @@ public class NearActivityFragment extends BaseFragment {
 
 	private HuodongListHttpController controller;
 
+	private boolean firstFlag = true;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,17 +62,28 @@ public class NearActivityFragment extends BaseFragment {
 
 		controller = new HuodongListHttpController(this, handler);
 		
-		String cache = App.CACHE.read(CACHE_KEY);
-		if (!TextUtils.isEmpty(cache)) {
-			try {
-				List<BaseActivityMessage> results = parseJson(new JSONObject(cache));
-				adapter.data.addAll(results);
-			}
-			catch (Exception e) {
-				ELog.e("Exception:" + e.getMessage());
-				e.printStackTrace();
-			}
+		if (firstFlag) {
+			showProgressDialog();
+			firstFlag = false;
 		}
+		App.THREAD.execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				String cache = App.CACHE.read(CACHE_KEY);
+				if (!TextUtils.isEmpty(cache)) {
+					try {
+						List<BaseActivityMessage> results = parseJson(new JSONObject(cache));
+						adapter.data.addAll(results);
+					}
+					catch (Exception e) {
+						ELog.e("Exception:" + e.getMessage());
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		
 	}
 
 	@Override
@@ -119,10 +131,17 @@ public class NearActivityFragment extends BaseFragment {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		if (!adapter.isEmpty()) {
-			adapter.notifyDataSetChanged();
-		}
-		controller.obtainNearActivity(1);
+		handler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (!adapter.isEmpty()) {
+					adapter.notifyDataSetChanged();
+					dismissProgressDialog();
+				}
+				controller.obtainNearActivity(1);
+			}
+		}, 500);
 	}
 
 	@Override
@@ -176,6 +195,7 @@ public class NearActivityFragment extends BaseFragment {
 				}
 				lstView.stopRefresh();
 				lstView.stopLoadMore();
+				dismissProgressDialog();
 				break;
 
 //			case HuodongListHttpController.HANDLER_UPDATE_PROGRESS:

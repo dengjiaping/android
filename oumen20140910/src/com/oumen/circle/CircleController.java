@@ -1,8 +1,5 @@
 package com.oumen.circle;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +8,11 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.AbsListView;
 import android.widget.Toast;
+import android.widget.AbsListView.OnScrollListener;
 
-import com.ab.view.listener.AbOnListViewListener;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.oumen.R;
 import com.oumen.android.App;
 import com.oumen.android.peers.CommentItem;
@@ -27,9 +25,10 @@ import com.oumen.peer.OumenCircleNoticeListActivity;
 import com.oumen.tools.ELog;
 import com.oumen.user.UserInfoActivity;
 import com.oumen.widget.dialog.PickImageDialog;
+import com.oumen.widget.list.HSZListViewAdapter;
 
-public class CircleController implements Handler.Callback, View.OnClickListener, AbOnListViewListener {
-	protected final CircleListAdapter1 adapter = new CircleListAdapter1();
+public class CircleController implements Handler.Callback, View.OnClickListener, OnScrollListener {
+	protected final AdapterImpl adapter = new AdapterImpl();
 
 	protected final Handler handler = new Handler(this);
 	protected final CircleHttpController httpController = new CircleHttpController(handler);
@@ -39,6 +38,8 @@ public class CircleController implements Handler.Callback, View.OnClickListener,
 	protected final int selfUid;
 
 	private LoginConfrim loginConfrim;
+	
+	private boolean firstFlag = true;
 
 	CircleController(CircleListFragment host) {
 		this.host = host;
@@ -48,8 +49,11 @@ public class CircleController implements Handler.Callback, View.OnClickListener,
 	}
 
 	void onViewCreated(View view, Bundle savedInstanceState) {
-//		host.lstView.headerLoad();
-		httpController.obtainList(null, adapter);
+		if (firstFlag) {
+			host.showProgressDialog();
+			firstFlag = false;
+		}
+		host.lstView.headerLoad();
 	}
 
 	// TODO onActivityResult
@@ -85,27 +89,10 @@ public class CircleController implements Handler.Callback, View.OnClickListener,
 		return false;
 	}
 
-	public class CircleListAdapter1 extends BaseAdapter implements View.OnClickListener {
-
-		final List<CircleUserMsg> data = new ArrayList<CircleUserMsg>();
+	public class CircleListAdapter extends HSZListViewAdapter<CircleUserMsg> implements View.OnClickListener {
 
 		@Override
-		public int getCount() {
-			return data.size();
-		}
-
-		@Override
-		public CircleUserMsg getItem(int position) {
-			return data.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		synchronized public View getView(int position, View convertView, ViewGroup parent) {
 			CircleItem item = null;
 			if (convertView == null) {
 				CircleItemData itemData = new CircleItemData();
@@ -113,21 +100,26 @@ public class CircleController implements Handler.Callback, View.OnClickListener,
 				item.setTag(itemData);
 				item.setButtonClickListener(this);
 				itemData.groupIndex = position;
-				itemData.groupData = data.get(position);
+				itemData.groupData = get(position);
 			}
 			else {
 				item = (CircleItem) convertView;
 				CircleItemData itemData = (CircleItemData) item.getTag();
 				itemData.groupIndex = position;
-				itemData.groupData = data.get(position);
+				itemData.groupData = get(position);
 			}
 			long time = System.currentTimeMillis();
-			synchronized (this) {
-				item.update();
-			}
-			ELog.w("加载一条item所需时间" + (System.currentTimeMillis() - time));
+			item.update(scrollFlag);
+			ELog.e("加载一条item需要时间：" + (System.currentTimeMillis() - time));
 			return item;
 		}
+
+		@Override
+		public void onClick(View v) {
+		}
+	}
+
+	private class AdapterImpl extends CircleListAdapter {
 
 		@Override
 		public void onClick(View v) {
@@ -183,6 +175,26 @@ public class CircleController implements Handler.Callback, View.OnClickListener,
 			}
 		}
 
+		@Override
+		public void onHeaderLoad() {
+			ELog.i("");
+			isLoading = true;
+			host.headerView.setProgressVisibility(View.VISIBLE);
+			if (adapter.isEmpty()) {
+//				host.lstView.setLoadingViewVisibility(View.VISIBLE);
+				host.lstView.setEmptyViewVisibility(View.GONE);
+			}
+
+			httpController.obtainList(null, adapter);
+		}
+
+		@Override
+		public void onFooterLoad() {
+			ELog.i("");
+			isLoading = true;
+			host.footerView.setState(HSZListViewAdapter.STATE_LOADING);
+			httpController.obtainList(ObtainType.FOOTER, adapter);
+		}
 	}
 
 	private void onCommentItemClick(CircleItemData data) {
@@ -272,44 +284,70 @@ public class CircleController implements Handler.Callback, View.OnClickListener,
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {
 			case CircleHttpController.HANDLER_OBTAIN_LIST:
+				isLoading = false;
 				synchronized (adapter) {
+					if (host.footerView.getState() == HSZListViewAdapter.STATE_LOADING) {
+						host.footerView.setState(HSZListViewAdapter.STATE_NORMAL);
+					}
+
 					if (msg.obj instanceof CircleDataWrapper) {
 						CircleDataWrapper wrapper = (CircleDataWrapper) msg.obj;
 
 						if (ObtainType.FOOTER.equals(wrapper.obtainType)) {
-							adapter.data.addAll(wrapper.data);
+							adapter.addAll(wrapper.data);
 						}
 						else {
-							adapter.data.clear();
-							adapter.data.addAll(wrapper.data);
+							adapter.clear();
+							adapter.addAll(wrapper.data);
 						}
 
 						if (wrapper.http) {
 							host.headerView.setProgressVisibility(View.GONE);
+							if (adapter.isEmpty()) {
+								host.footerView.setVisibility(View.GONE);
+//								host.lstView.setLoadingViewVisibility(View.GONE);
+								host.lstView.setEmptyViewVisibility(View.VISIBLE);
+							}
+							else {
+								host.footerView.setVisibility(View.VISIBLE);
+//								host.lstView.setLoadingViewVisibility(View.GONE);
+								host.lstView.setEmptyViewVisibility(View.GONE);
+							}
 						}
 					}
 
 					if (msg.arg2 != 0) {
-						ELog.e("Delayed update");
 						//数据发生改变
+						adapter.notifyDataSetChanged();
 						handler.postDelayed(new Runnable() {
 
 							@Override
 							public void run() {
+								ELog.e("Delayed update");
 								adapter.notifyDataSetChanged();
 
-								host.headerView.setProgressVisibility(View.GONE);
-								host.lstView.stopRefresh();
-								host.lstView.stopLoadMore();
+								host.lstView.loaded();
 							}
 						}, 100);
 					}
 
 					if (msg.arg1 != 0) {
 						Toast.makeText(host.getActivity(), msg.arg1, Toast.LENGTH_SHORT).show();
+
 						host.headerView.setProgressVisibility(View.GONE);
+						if (adapter.isEmpty()) {
+							host.footerView.setVisibility(View.GONE);
+//							host.lstView.setLoadingViewVisibility(View.GONE);
+							host.lstView.setEmptyViewVisibility(View.VISIBLE);
+						}
+						else {
+							host.footerView.setVisibility(View.VISIBLE);
+//							host.lstView.setLoadingViewVisibility(View.GONE);
+							host.lstView.setEmptyViewVisibility(View.GONE);
+						}
 					}
 				}
+				host.dismissProgressDialog();
 				break;
 
 			case CircleHttpController.HANDLER_DELETE_COMMENT:
@@ -408,14 +446,46 @@ public class CircleController implements Handler.Callback, View.OnClickListener,
 		return false;
 	}
 
-	@Override
-	public void onRefresh() {
-		host.headerView.setProgressVisibility(View.VISIBLE);
-		httpController.obtainList(null, adapter);
-	}
+	private boolean isLoading = false;
 
 	@Override
-	public void onLoadMore() {
-		httpController.obtainList(ObtainType.FOOTER, adapter);
+	public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+		if (firstVisibleItem + visibleItemCount == totalItemCount && !isLoading) {
+			isLoading = true;// == true 表示正在加载，加载完毕设置为false
+			if (firstVisibleItem <= adapter.getCount() - 2) {
+				handler.postDelayed(new Runnable() {
+
+					public void run() {
+						ELog.e("后台开始加载数据");
+						host.lstView.footerLoad();
+					}
+				}, 500);
+			}
+		}
+	}
+
+	private boolean scrollFlag = false;
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		switch (scrollState) {
+			case OnScrollListener.SCROLL_STATE_FLING:
+				ELog.i("pause");
+				scrollFlag = true;
+				ImageLoader.getInstance().pause();
+				break;
+			case OnScrollListener.SCROLL_STATE_IDLE:
+				ELog.i("resume");
+				scrollFlag = false;
+				ImageLoader.getInstance().resume();
+				break;
+			case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+				scrollFlag = true;
+				ELog.i("pause");
+				ImageLoader.getInstance().pause();
+				break;
+			default:
+				break;
+		}
 	}
 }

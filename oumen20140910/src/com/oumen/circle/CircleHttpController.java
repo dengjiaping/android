@@ -18,7 +18,7 @@ import com.oumen.android.peers.Prise;
 import com.oumen.android.peers.entity.Comment;
 import com.oumen.android.peers.entity.CircleUserMsg;
 import com.oumen.android.util.Constants;
-import com.oumen.circle.CircleController.CircleListAdapter1;
+import com.oumen.circle.CircleController.CircleListAdapter;
 import com.oumen.http.DefaultHttpCallback;
 import com.oumen.http.DefaultHttpCallback.EventListener;
 import com.oumen.http.ExceptionHttpResult;
@@ -66,30 +66,24 @@ public class CircleHttpController {
 	 * @param adapter
 	 * @return
 	 */
-	public HttpRequest obtainList(final ObtainType obtainType, CircleListAdapter1 adapter) {
+	public HttpRequest obtainList(final ObtainType obtainType, CircleListAdapter adapter) {
 		this.obtainType = obtainType;
 		
+		int selfUid = App.PREFS.getUid();
 		if (obtainType == null) {
-			App.THREAD.execute(new Runnable() {
-				
-				@Override
-				public void run() {
-					int selfUid = App.PREFS.getUid();
-					LinkedList<CircleUserMsg> tmpList = new LinkedList<CircleUserMsg>();
-					List<SimpleCircle> cache = SimpleCircle.query(selfUid, App.DB);
-					for (SimpleCircle i : cache) {
-						try {
-							CircleUserMsg obj = new CircleUserMsg(i.reference);
-							tmpList.add(obj);
-						}
-						catch (JSONException e) {
-							ELog.e("Exception:" + e.getMessage());
-							e.printStackTrace();
-						}
-					}
-					handler.sendMessage(handler.obtainMessage(HANDLER_OBTAIN_LIST, 0, 1, new CircleDataWrapper(obtainType, false, tmpList)));
+			LinkedList<CircleUserMsg> tmpList = new LinkedList<CircleUserMsg>();
+			List<SimpleCircle> cache = SimpleCircle.query(selfUid, App.DB);
+			for (SimpleCircle i : cache) {
+				try {
+					CircleUserMsg obj = new CircleUserMsg(i.reference);
+					tmpList.add(obj);
 				}
-			});
+				catch (JSONException e) {
+					ELog.e("Exception:" + e.getMessage());
+					e.printStackTrace();
+				}
+			}
+			handler.sendMessage(handler.obtainMessage(HANDLER_OBTAIN_LIST, 0, 1, new CircleDataWrapper(obtainType, false, tmpList)));
 		}
 		
 		HttpRequest req = obtainListByHttp(obtainType, adapter);
@@ -102,7 +96,7 @@ public class CircleHttpController {
 	 * @param adapter
 	 * @return
 	 */
-	public HttpRequest obtainListByHttp(final ObtainType obtainType, CircleListAdapter1 adapter) {
+	public HttpRequest obtainListByHttp(final ObtainType obtainType, CircleListAdapter adapter) {
 		ELog.i("");
 		this.obtainType = obtainType;
 		
@@ -115,10 +109,10 @@ public class CircleHttpController {
 		ArrayList<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("uid", String.valueOf(App.PREFS.getUid())));
 		if (ObtainType.HEADER.equals(obtainType) && !adapter.isEmpty()) {
-			params.add(new BasicNameValuePair("prev", String.valueOf(adapter.data.get(0).getInfo().getTime())));
+			params.add(new BasicNameValuePair("prev", String.valueOf(adapter.get(0).getInfo().getTime())));
 		}
 		else if (ObtainType.FOOTER.equals(obtainType) && !adapter.isEmpty()) {
-			params.add(new BasicNameValuePair("after", String.valueOf(adapter.data.get(adapter.getCount() - 1).getInfo().getTime())));
+			params.add(new BasicNameValuePair("after", String.valueOf(adapter.get(adapter.getCount() - 1).getInfo().getTime())));
 		}
 		
 		DefaultHttpCallback callback = new DefaultHttpCallback(new DefaultHttpCallback.EventListener() {
@@ -182,7 +176,7 @@ public class CircleHttpController {
 	 * @param adapter
 	 * @return
 	 */
-	public HttpRequest obtainDadayIsHereListByHttp(final ObtainType obtainType, final CircleListAdapter1 adapter) {
+	public HttpRequest obtainDadayIsHereListByHttp(final ObtainType obtainType, final CircleListAdapter adapter) {
 		this.obtainType = obtainType;
 		
 		if (App.NetworkType.NONE.equals(App.getNetworkType())) {
@@ -195,10 +189,10 @@ public class CircleHttpController {
 		params.add(new BasicNameValuePair("uid", String.valueOf(App.PREFS.getUid())));
 		params.add(new BasicNameValuePair("modes", String.valueOf(4)));// TODO 比偶们圈多的参数
 		if (ObtainType.HEADER.equals(obtainType) && !adapter.isEmpty()) {
-			params.add(new BasicNameValuePair("prev", String.valueOf(adapter.data.get(0).getInfo().getTime())));
+			params.add(new BasicNameValuePair("prev", String.valueOf(adapter.get(0).getInfo().getTime())));
 		}
 		else if (ObtainType.FOOTER.equals(obtainType) && !adapter.isEmpty()) {
-			params.add(new BasicNameValuePair("after", String.valueOf(adapter.data.get(adapter.getCount() - 1).getInfo().getTime())));
+			params.add(new BasicNameValuePair("after", String.valueOf(adapter.get(adapter.getCount() - 1).getInfo().getTime())));
 		}
 		
 		DefaultHttpCallback callback = new DefaultHttpCallback(new DefaultHttpCallback.EventListener() {
@@ -233,11 +227,11 @@ public class CircleHttpController {
 
 					synchronized (adapter) {
 						if (ObtainType.FOOTER.equals(obtainType)) {
-							adapter.data.addAll(tmpList);
+							adapter.addAll(tmpList);
 						}
 						else {
-							adapter.data.clear();
-							adapter.data.addAll(tmpList);
+							adapter.clear();
+							adapter.addAll(tmpList);
 						}
 					}
 
@@ -563,7 +557,7 @@ public class CircleHttpController {
 	}
 	
 	// TODO Delete Content
-	public HttpRequest deleteContent(final CircleItemData data, final CircleListAdapter1 adapter) {
+	public HttpRequest deleteContent(final CircleItemData data, final HSZListViewAdapter<CircleUserMsg> adapter) {
 		if (App.NetworkType.NONE.equals(App.getNetworkType())) {
 			//网络不给力
 			handler.sendMessage(handler.obtainMessage(App.HANDLER_TOAST, R.string.err_network_invalid, 0));
@@ -583,7 +577,7 @@ public class CircleHttpController {
 					}
 					else {
 						if ("1".equals(response)) {
-							adapter.data.remove(data.groupData);
+							adapter.remove(data.groupData);
 							handler.sendEmptyMessage(HANDLER_DELETE_CONTENT);
 						}
 						else {

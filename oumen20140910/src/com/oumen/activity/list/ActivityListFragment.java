@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
@@ -113,6 +112,8 @@ public class ActivityListFragment extends BaseFragment implements View.OnTouchLi
 	private LoginConfrim loginConfrim;
 
 	private HuodongListHttpController controller;
+	
+	private boolean firstFlag = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -132,18 +133,29 @@ public class ActivityListFragment extends BaseFragment implements View.OnTouchLi
 
 		controller = new HuodongListHttpController(this, handler);
 
-		String key = getCacheKey();
-		String cache = App.CACHE.read(key);
-		if (!TextUtils.isEmpty(cache)) {
-			try {
-				List<BaseActivityMessage> results = parseJson(new JSONObject(cache));
-				adapter.data.addAll(results);
-			}
-			catch (Exception e) {
-				ELog.e("Exception:" + e.getMessage());
-				e.printStackTrace();
-			}
+		if(firstFlag) {
+			firstFlag = false;
+			showProgressDialog();
 		}
+		
+		App.THREAD.execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				String key = getCacheKey();
+				String cache = App.CACHE.read(key);
+				if (!TextUtils.isEmpty(cache)) {
+					try {
+						List<BaseActivityMessage> results = parseJson(new JSONObject(cache));
+						adapter.data.addAll(results);
+					}
+					catch (Exception e) {
+						ELog.e("Exception:" + e.getMessage());
+						e.printStackTrace();
+					}
+				}
+			}
+		});
 	}
 
 	@Override
@@ -206,19 +218,6 @@ public class ActivityListFragment extends BaseFragment implements View.OnTouchLi
 		lstView.setSelector(android.R.color.transparent);
 		lstView.setAbOnListViewListener(listviewListener);
 
-		if (type == App.INT_UNSET) {
-			tvTitle.setText(R.string.filter);
-			filterContainer.setVisibility(View.VISIBLE);
-		}
-		else if (type == HuodongTypeUtil.CONDITION_FUZZY_SEARCH) {
-			tvTitle.setText(App.PREFS.getLastHistorySearch());
-			filterContainer.setVisibility(View.GONE);
-		}
-		else {
-			tvTitle.setText(huodongTypeList[type]);
-			filterContainer.setVisibility(View.VISIBLE);
-		}
-
 		return view;
 	}
 
@@ -238,10 +237,34 @@ public class ActivityListFragment extends BaseFragment implements View.OnTouchLi
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		initData();
+		
+		if (type == App.INT_UNSET) {
+			tvTitle.setText(R.string.filter);
+			filterContainer.setVisibility(View.VISIBLE);
+		}
+		else if (type == HuodongTypeUtil.CONDITION_FUZZY_SEARCH) {
+			tvTitle.setText(App.PREFS.getLastHistorySearch());
+			filterContainer.setVisibility(View.GONE);
+		}
+		else {
+			tvTitle.setText(huodongTypeList[type]);
+			filterContainer.setVisibility(View.VISIBLE);
+		}
+		
+		handler.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				initData();
+			}
+		}, 500);
 	}
 
 	public void initData() {
+		if (!adapter.data.isEmpty() && firstFlag) {
+			adapter.notifyDataSetChanged();
+			dismissProgressDialog();
+		}
 		controller.obtainActivities(type, ageType.code(), orderType.code(), filterTime, 1);
 	}
 
@@ -368,6 +391,7 @@ public class ActivityListFragment extends BaseFragment implements View.OnTouchLi
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {
 			case HuodongListHttpController.HANDLER_REQUEST_LIST:
+				dismissProgressDialog();
 				synchronized (adapter) {
 					if (msg.obj instanceof List<?>) {
 						List<BaseActivityMessage> results = (List<BaseActivityMessage>) msg.obj;

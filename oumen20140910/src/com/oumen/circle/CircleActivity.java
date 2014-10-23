@@ -40,7 +40,6 @@ public class CircleActivity extends FragmentActivity implements FloatViewHostCon
 		if (fragCircle == null) {
 			fragCircle = new CircleListFragment();
 		}
-		
 		FragmentManager manager = getSupportFragmentManager();
 		manager.beginTransaction().replace(R.id.circle_container, fragCircle).commit();
 	}

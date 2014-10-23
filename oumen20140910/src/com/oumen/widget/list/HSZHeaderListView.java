@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ import com.oumen.R;
 import com.oumen.tools.ELog;
 
 public class HSZHeaderListView<E> extends FrameLayout implements View.OnTouchListener {
-	public static final int PULL_RATIO = 4;
+	public static final int PULL_RATIO = 3;
 
 	protected InnerListView listView;
 	protected View headerView;
@@ -197,6 +198,10 @@ public class HSZHeaderListView<E> extends FrameLayout implements View.OnTouchLis
 
 	public View getHeaderView() {
 		return headerView;
+	}
+	
+	public void setOnScrollListener(OnScrollListener scrollListener) {
+		listView.setOnScrollListener(scrollListener);
 	}
 
 	public void setHeaderView(View view) {
