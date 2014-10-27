@@ -98,6 +98,7 @@ public class App extends BaseApplication implements OnGetGeoCoderResultListener 
 	public static final String GUEST_EMAIL_SUFFIX = "@guest.com";
 
 	public static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("00");
+	public static final DecimalFormat RATE_FORMAT = new DecimalFormat("##0.0"); 
 	public static final SimpleDateFormat YYYY_MM_DD_FORMAT = new SimpleDateFormat("yyyy-MM-dd", LOCALE);
 	public static final SimpleDateFormat YYYY_MM_DD_CHINESE_FORMAT = new SimpleDateFormat("yyyy年MM月dd日", LOCALE);
 	public static final SimpleDateFormat YYYY_MM_DD_HH_MM_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm", LOCALE);
@@ -138,6 +139,7 @@ public class App extends BaseApplication implements OnGetGeoCoderResultListener 
 			showImageOnFail(R.drawable.rectangle_photo).
 			resetViewBeforeLoading(true).
 			cacheOnDisk(true).
+			cacheInMemory(true).
 			imageScaleType(ImageScaleType.EXACTLY)
 			.bitmapConfig(Bitmap.Config.RGB_565).
 			preProcessor(new BitmapProcessor() {
@@ -151,6 +153,7 @@ public class App extends BaseApplication implements OnGetGeoCoderResultListener 
 	public static final DisplayImageOptions OPTIONS_PIC = new DisplayImageOptions.Builder().
 			showImageForEmptyUri(R.drawable.pic_default).
 			showImageOnFail(R.drawable.pic_default).
+			showImageOnLoading(R.drawable.pic_default).
 			resetViewBeforeLoading(true).
 			cacheOnDisk(true).
 			imageScaleType(ImageScaleType.EXACTLY).
@@ -161,7 +164,8 @@ public class App extends BaseApplication implements OnGetGeoCoderResultListener 
 				public Bitmap process(Bitmap bitmap) {
 					return ImageTools.clip2square(bitmap);
 				}
-			}).build();
+			})
+			.build();
 	
 	public static final DisplayImageOptions OPTIONS_DEFAULT_PIC = new DisplayImageOptions.Builder()
 			.showImageForEmptyUri(R.drawable.pic_default)

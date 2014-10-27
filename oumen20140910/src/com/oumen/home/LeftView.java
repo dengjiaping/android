@@ -18,7 +18,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.oumen.R;
 import com.oumen.activity.PushActivityListActivity;
-import com.oumen.activity.search.SearchActivity;
 import com.oumen.activity.user.UserActivity;
 import com.oumen.android.App;
 import com.oumen.android.UserProfile;

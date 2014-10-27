@@ -11,7 +11,8 @@
     <com.oumen.activity.detail.RectImageHasDownloadView
         android:id="@+id/huodong_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="1px" />
 
     <TextView
         android:id="@+id/title"

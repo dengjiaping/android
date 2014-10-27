@@ -202,8 +202,7 @@ public class CommentListFragment extends BaseFragment {
 							currentPage = msg.arg1;
 						}
 						
-						DecimalFormat fnum = new DecimalFormat("##0.0"); 
-						String str = fnum.format(currentRate) + "%";
+						String str = App.RATE_FORMAT.format(currentRate) + "%";
 						rate.setText(str);
 						describle.setText("参加此活动的用户满意度" + str + ",已有" + total + "人评价");
 						

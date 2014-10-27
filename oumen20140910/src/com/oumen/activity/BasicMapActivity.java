@@ -23,7 +23,7 @@ import com.baidu.mapapi.map.InfoWindow.OnInfoWindowClickListener;
 import com.baidu.mapapi.model.LatLng;
 import com.oumen.R;
 import com.oumen.TitleBar;
-import com.oumen.activity.message.ActivityBean;
+import com.oumen.activity.message.DetailActivityMessage;
 import com.oumen.android.BaseActivity;
 
 /**
@@ -32,7 +32,7 @@ import com.oumen.android.BaseActivity;
  */
 public class BasicMapActivity extends BaseActivity {
 	public static final float MAP_ENLARGER_LEVEL = 14.0f;
-	private ActivityBean amuse;
+	private DetailActivityMessage amuse;
 
 	private TitleBar titleBar;
 	private Button ivBack;
@@ -51,7 +51,7 @@ public class BasicMapActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.amusement_map);
 		init();
-		amuse = (ActivityBean) getIntent().getParcelableExtra("amusementmap");
+		amuse = (DetailActivityMessage) getIntent().getParcelableExtra("amusementmap");
 		if (amuse != null) {
 			double lat = Double.parseDouble(amuse.getLat());
 			double lng = Double.parseDouble(amuse.getLng());
