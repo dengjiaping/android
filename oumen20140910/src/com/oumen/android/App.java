@@ -42,6 +42,7 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 import com.oumen.MainActivity;
 import com.oumen.R;
@@ -159,6 +160,25 @@ public class App extends BaseApplication implements OnGetGeoCoderResultListener 
 			imageScaleType(ImageScaleType.EXACTLY).
 			bitmapConfig(Bitmap.Config.RGB_565).
 			preProcessor(new BitmapProcessor() {
+
+				@Override
+				public Bitmap process(Bitmap bitmap) {
+					return ImageTools.clip2square(bitmap);
+				}
+			})
+			.build();
+	public static final DisplayImageOptions OPTIONS_ROUND_PIC = new DisplayImageOptions.Builder()
+			.showImageForEmptyUri(R.drawable.pic_default)
+			.showImageOnFail(R.drawable.pic_default)
+			.showImageOnLoading(R.drawable.pic_default)
+			.resetViewBeforeLoading(true)
+			.cacheInMemory(true)
+			.cacheOnDisk(true)
+			.considerExifParams(true)
+			.imageScaleType(ImageScaleType.EXACTLY)
+			.bitmapConfig(Bitmap.Config.RGB_565)
+			.displayer(new RoundedBitmapDisplayer(10))
+			.preProcessor(new BitmapProcessor() {
 
 				@Override
 				public Bitmap process(Bitmap bitmap) {

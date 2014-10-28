@@ -76,15 +76,7 @@ public class RectImageHasDownloadView extends FrameLayout {
 	}
 	
 	public void update(String url) {
-		File cache = ImageLoader.getInstance().getDiskCache().get(url);
-		if (cache != null && cache.exists()) {
-			Bitmap pic = BitmapFactory.decodeFile(cache.getAbsolutePath());
-			img.setImageBitmap(pic);
-			onLoadingComplete();
-		}
-		else {
-			ImageLoader.getInstance().displayImage(url, img, App.OPTIONS_DEFAULT_PIC, loadingListener, progressListener);
-		}
+		ImageLoader.getInstance().displayImage(url, img, App.OPTIONS_DEFAULT_PIC, loadingListener, progressListener);
 	}
 	
 	public void onLoadingComplete() {

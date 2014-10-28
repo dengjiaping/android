@@ -37,7 +37,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class NearHuodongItem extends RelativeLayout {
-	private RoundRectangleImageView photo;
+//	private RoundRectangleImageView photo;
+	private ImageView photo;
 	private TextView name, address, money, distance, type;
 
 	private final SpannableStringBuilder builder = new SpannableStringBuilder();
@@ -55,8 +56,8 @@ public class NearHuodongItem extends RelativeLayout {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.near_huodong_item, this, true);
 
-		photo = (RoundRectangleImageView) findViewById(R.id.photo);
-		photo.setRadius(10);
+		photo = (ImageView) findViewById(R.id.photo);
+//		photo.setRadius(10);
 		name = (TextView) findViewById(R.id.name);
 		address = (TextView) findViewById(R.id.address);
 		money = (TextView) findViewById(R.id.money);
@@ -67,20 +68,7 @@ public class NearHuodongItem extends RelativeLayout {
 	}
 
 	public void update(BaseActivityMessage bean) {
-		String url = bean.getPicUrl(getResources().getDimensionPixelSize(R.dimen.big_photo_size));
-//		File cache = ImageLoader.getInstance().getDiskCache().get(url);
-		File cache = DiskCacheUtils.findInCache(url, ImageLoader.getInstance().getDiskCache());
-		if (cache != null && cache.exists()) {
-			ELog.i("File cache");
-			Bitmap pic = BitmapFactory.decodeFile(cache.getAbsolutePath());
-			pic = ImageTools.clip2square(pic);
-			photo.setImageBitmap(pic);
-		}
-		else {
-			ELog.i("ImageLoader");
-			ImageLoader.getInstance().displayImage(url, photo, App.OPTIONS_PIC);
-//			ImageLoader.getInstance().displayImage(url, photo, App.OPTIONS_DEFAULT_PIC, loadingListener);
-		}
+		ImageLoader.getInstance().displayImage(bean.getPicUrl(), photo, App.OPTIONS_ROUND_PIC);
 
 		name.setText(bean.getName());
 		address.setText(bean.getAddress());

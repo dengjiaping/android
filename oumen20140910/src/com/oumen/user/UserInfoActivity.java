@@ -20,8 +20,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ab.view.listener.AbOnListViewListener;
-import com.ab.view.pullview.AbPullListView;
 import com.oumen.R;
 import com.oumen.TitleBar;
 import com.oumen.android.App;
@@ -47,6 +45,8 @@ import com.oumen.widget.dialog.SingleEditorDialog;
 import com.oumen.widget.file.ImageData;
 import com.oumen.widget.image.ImagePreviewActivity;
 import com.oumen.widget.preview.image.ImagePagerFragment;
+import com.oumen.widget.refushlist.AbOnListViewListener;
+import com.oumen.widget.refushlist.AbPullListView;
 
 /**
  * 用户个人中心界面

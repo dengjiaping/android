@@ -1,11 +1,8 @@
 package com.oumen.activity.list;
 
-import java.lang.ref.SoftReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,26 +13,28 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.Choreographer.FrameCallback;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AbsListView.OnScrollListener;
 
-import com.ab.view.listener.AbOnListViewListener;
 import com.oumen.R;
 import com.oumen.TitleBar;
 import com.oumen.activity.detail.HuoDongDetailActivity;
 import com.oumen.activity.message.BaseActivityMessage;
-import com.oumen.activity.widget.RefushListView;
 import com.oumen.android.App;
 import com.oumen.android.BaseFragment;
 import com.oumen.home.LoginConfrim;
 import com.oumen.tools.ELog;
+import com.oumen.widget.refushlist.AbOnListViewListener;
+import com.oumen.widget.refushlist.AbPullListView;
 
 /**
  * 
@@ -47,8 +46,11 @@ public class NearActivityFragment extends BaseFragment {
 	//标题行控件
 	private TitleBar titleBar;
 	private Button btnLeft;
+	
+	private FrameLayout emptyContainer;
+	private TextView emptyView;
 
-	private RefushListView lstView;
+	private AbPullListView lstView;
 
 	private final ActivityAdapter adapter = new ActivityAdapter();
 
@@ -60,10 +62,7 @@ public class NearActivityFragment extends BaseFragment {
 
 	private boolean firstFlag = true;
 	
-	private boolean scrollFlag = false;
-	
-	private int start_index = App.INT_UNSET;
-	private int end_index = App.INT_UNSET;
+	private String tempJsonStr = null;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -73,10 +72,6 @@ public class NearActivityFragment extends BaseFragment {
 
 		controller = new HuodongListHttpController(this, handler);
 		
-		if (firstFlag) {
-			showProgressDialog();
-			firstFlag = false;
-		}
 		App.THREAD.execute(new Runnable() {
 			
 			@Override
@@ -94,7 +89,6 @@ public class NearActivityFragment extends BaseFragment {
 				}
 			}
 		});
-		
 	}
 
 	@Override
@@ -108,74 +102,44 @@ public class NearActivityFragment extends BaseFragment {
 
 		btnLeft = titleBar.getLeftButton();
 		btnLeft.setOnClickListener(clickListener);
+		
+		emptyContainer = (FrameLayout) view.findViewById(R.id.layer);
+		emptyContainer.setVisibility(View.GONE);
+		emptyView = (TextView) view.findViewById(R.id.empty_view);
+		emptyView.setText(getResources().getString(R.string.activity_near_empty));
 
 		// ------------ListView-------------
-
-		lstView = (RefushListView) view.findViewById(R.id.refreshablelistview);
+		ProgressBar empty = (ProgressBar) view.findViewById(R.id.progress);
+		lstView = (AbPullListView) view.findViewById(R.id.refreshablelistview);
 		lstView.setBackgroundColor(getResources().getColor(R.color.white));
 		lstView.setDivider(new ColorDrawable(getResources().getColor(R.color.user_center_click_bg)));
 		lstView.setDividerHeight(1);
-		lstView.getHeaderView().setHeaderProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
-		lstView.getFooterView().setFooterProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
-		TextView emptyView = (TextView) view.findViewById(R.id.empty_view);
-		emptyView.setText(getResources().getString(R.string.activity_near_empty));
+		lstView.setEmptyView(empty);
 		lstView.setAdapter(adapter);
-		lstView.setEmptyView(emptyView);
 		lstView.setSelector(getResources().getDrawable(R.drawable.white_and_grey_selector));
 		lstView.setAbOnListViewListener(listViewListener);
-//		lstView.setOnTouchListener(new View.OnTouchListener() {
-//			
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				if(event.getAction() == MotionEvent.ACTION_MOVE && lstView.getScrollState() != OnScrollListener.SCROLL_STATE_FLING){
-//					start_index = lstView.getCurrentVisibleStartIndex();
-//					end_index = lstView.getCurrentVisibleEndIndex();
-//					scrollFlag = false;
-//					ELog.i("start_index =" + start_index + "end_index =" + end_index);
-//					for (; start_index < end_index; start_index++) {
-//						NearHuodongItem tempView = (NearHuodongItem)lstView.findViewWithTag(start_index);
-//						if (tempView != null) {
-//							tempView.updateImage(adapter.data.get(start_index));
-//						}
-//					}
-//                }
-//				else {
-//					ELog.i("scroll");
-//					scrollFlag = true;
-//				}
-//				return false;
-//			}
-//		});
 		return view;
 	}
 
-	private AbOnListViewListener listViewListener = new AbOnListViewListener() {
-
-		@Override
-		public void onRefresh() {
-			controller.obtainNearActivity(1);
-		}
-
-		@Override
-		public void onLoadMore() {
-			int page = adapter.isEmpty() ? 1 : currentPage + 1;
-			controller.obtainNearActivity(page);
-		}
-	};
-
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
+		
 		handler.postDelayed(new Runnable() {
 			
 			@Override
 			public void run() {
 				if (!adapter.isEmpty()) {
 					adapter.notifyDataSetChanged();
-					dismissProgressDialog();
 				}
+//				else {
+//					if (firstFlag) {
+//						showProgressDialog();
+//						firstFlag = false;
+//					}
+//				}
 				controller.obtainNearActivity(1);
 			}
-		}, 500);
+		}, 1000);
 	}
 
 	@Override
@@ -189,17 +153,16 @@ public class NearActivityFragment extends BaseFragment {
 	}
 
 	public List<BaseActivityMessage> parseJson(final JSONObject json) throws JSONException {
-		ELog.i("" + Thread.currentThread().getName());
 		List<BaseActivityMessage> results = new LinkedList<BaseActivityMessage>();
-		JSONArray array = json.getJSONArray("data");
-		
-		for (int i = 0; i < array.length(); i++) {
-			JSONObject itemJson = array.getJSONObject(i);
-			results.add(new BaseActivityMessage(itemJson));
-		}
-		
-		if (adapter.isEmpty() && !results.isEmpty()) {
-			App.CACHE.save(CACHE_KEY, json.toString());
+		if (json.has("data")) {
+			JSONArray array = json.getJSONArray("data");
+			
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject itemJson = array.getJSONObject(i);
+				results.add(new BaseActivityMessage(itemJson));
+			}
+			
+			tempJsonStr = json.toString();
 		}
 		return results;
 	}
@@ -209,32 +172,60 @@ public class NearActivityFragment extends BaseFragment {
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {
 			case HuodongListHttpController.HANDLER_REQUEST_LIST:
+				emptyContainer.setVisibility(View.GONE);
 				synchronized (adapter) {
 					if (msg.obj instanceof List<?>) {
 						List<BaseActivityMessage> results = (List<BaseActivityMessage>) msg.obj;
 						if (msg.arg1 == 1) {
 							adapter.data.clear();
+							if (!TextUtils.isEmpty(tempJsonStr) && results != null && results.size() > 0) {
+								App.CACHE.save(CACHE_KEY, tempJsonStr);
+							}
 						}
 						adapter.data.addAll(results);
 
 						if (!results.isEmpty()) {
 							currentPage = msg.arg1;
 						}
-//						adapter.notifyDataSetChanged();
+						adapter.notifyDataSetChanged();
 					}
 					else if (msg.obj instanceof CharSequence) {
 						Toast.makeText(lstView.getContext(), (CharSequence) msg.obj, Toast.LENGTH_SHORT).show();
 					}
-
-					adapter.notifyDataSetChanged();
 				}
 				lstView.stopRefresh();
 				lstView.stopLoadMore();
-				dismissProgressDialog();
+//				dismissProgressDialog();
+				break;
+			case HuodongListHttpController.HANDLER_NONE_NETWORK:
+//				dismissProgressDialog();
+				lstView.stopRefresh();
+				lstView.stopLoadMore();
+				if (adapter.isEmpty()) {
+					emptyContainer.setVisibility(View.VISIBLE);
+					emptyView.setText(getResources().getString(R.string.err_network_invalid));
+				}
+				else {
+					Toast.makeText(lstView.getContext(), getResources().getString(R.string.err_network_invalid), Toast.LENGTH_SHORT).show();
+				}
 				break;
 		}
 		return false;
 	}
+	
+	private final AbOnListViewListener listViewListener = new AbOnListViewListener() {
+
+		@Override
+		public void onRefresh() {
+			controller.obtainNearActivity(1);
+		}
+
+		@Override
+		public void onLoadMore() {
+			int page = adapter.isEmpty() ? 1 : currentPage + 1;
+			controller.obtainNearActivity(page);
+		}
+	};
 
 	private final View.OnClickListener clickListener = new View.OnClickListener() {
 		@Override

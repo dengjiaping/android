@@ -24,8 +24,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ab.view.listener.AbOnListViewListener;
-import com.ab.view.pullview.AbPullListView;
 import com.oumen.R;
 import com.oumen.TitleBar;
 import com.oumen.activity.detail.HuoDongDetailActivity;
@@ -38,6 +36,8 @@ import com.oumen.http.ExceptionHttpResult;
 import com.oumen.http.HttpRequest;
 import com.oumen.http.HttpResult;
 import com.oumen.tools.ELog;
+import com.oumen.widget.refushlist.AbOnListViewListener;
+import com.oumen.widget.refushlist.AbPullListView;
 
 /**
  * 用户自己的活动界面

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" />
 
-    <com.ab.view.pullview.AbPullListView
+    <com.oumen.widget.refushlist.AbPullListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

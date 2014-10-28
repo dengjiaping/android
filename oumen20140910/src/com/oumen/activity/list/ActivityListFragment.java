@@ -27,8 +27,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ab.view.listener.AbOnListViewListener;
-import com.ab.view.pullview.AbPullListView;
 import com.oumen.FloatWindowController;
 import com.oumen.R;
 import com.oumen.TitleBar;
@@ -46,6 +44,8 @@ import com.oumen.base.Cache;
 import com.oumen.home.LoginConfrim;
 import com.oumen.tools.ELog;
 import com.oumen.widget.calander.DateWidgetDayCell;
+import com.oumen.widget.refushlist.AbOnListViewListener;
+import com.oumen.widget.refushlist.AbPullListView;
 
 /**
  * 活动列表界面
@@ -391,7 +391,6 @@ public class ActivityListFragment extends BaseFragment implements View.OnTouchLi
 	public boolean handleMessage(Message msg) {
 		switch (msg.what) {
 			case HuodongListHttpController.HANDLER_REQUEST_LIST:
-				dismissProgressDialog();
 				synchronized (adapter) {
 					if (msg.obj instanceof List<?>) {
 						List<BaseActivityMessage> results = (List<BaseActivityMessage>) msg.obj;
@@ -413,14 +412,19 @@ public class ActivityListFragment extends BaseFragment implements View.OnTouchLi
 					lstView.stopRefresh();
 					lstView.stopLoadMore();
 				}
+				dismissProgressDialog();
 				break;
-
-//			case HuodongListHttpController.HANDLER_UPDATE_PROGRESS:
-//				ELog.i("Update");
-//				synchronized (adapter) {
-//					adapter.notifyDataSetChanged();
-//				}
-//				break;
+			case HuodongListHttpController.HANDLER_NONE_NETWORK:
+				lstView.stopRefresh();
+				lstView.stopLoadMore();
+				if (adapter.isEmpty()) {
+//					emptyContainer.setVisibility(View.VISIBLE);
+//					emptyView.setText(getResources().getString(R.string.err_network_invalid));
+				}
+				else {
+					Toast.makeText(lstView.getContext(), getResources().getString(R.string.err_network_invalid), Toast.LENGTH_SHORT).show();
+				}
+				break;
 		}
 		return false;
 	}
@@ -552,6 +556,7 @@ public class ActivityListFragment extends BaseFragment implements View.OnTouchLi
 	}
 
 	private class ActivityAdapter extends BaseAdapter {
+		
 		public ArrayList<BaseActivityMessage> data = new ArrayList<BaseActivityMessage>();
 
 		@Override

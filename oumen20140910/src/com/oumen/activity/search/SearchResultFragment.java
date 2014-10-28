@@ -22,8 +22,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.ab.view.listener.AbOnListViewListener;
-import com.ab.view.pullview.AbPullListView;
 import com.oumen.R;
 import com.oumen.activity.HuodongTypeUtil;
 import com.oumen.activity.HuodongTypeUtil.OrderType;
@@ -36,6 +34,8 @@ import com.oumen.android.App;
 import com.oumen.android.BaseFragment;
 import com.oumen.home.LoginConfrim;
 import com.oumen.tools.ELog;
+import com.oumen.widget.refushlist.AbOnListViewListener;
+import com.oumen.widget.refushlist.AbPullListView;
 
 /**
  * 

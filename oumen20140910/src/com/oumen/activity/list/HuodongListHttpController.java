@@ -23,6 +23,7 @@ import android.text.TextUtils;
 
 public class HuodongListHttpController {
 	public static final int HANDLER_REQUEST_LIST = 1;
+	public static final int HANDLER_NONE_NETWORK = 2;//没有网络
 //	public static final int HANDLER_UPDATE_PROGRESS = 2;
 	private Handler handler;
 
@@ -57,6 +58,11 @@ public class HuodongListHttpController {
 	 *            hdtypes=0&order=2&date=2014-10-05&applyage=5
 	 */
 	public void obtainActivities(int type, int age, int order, String date, final int page) {
+		//TODO　没有网络就不网络请求了，直接返回
+		if (App.NetworkType.NONE.equals(App.getNetworkType())) {
+			handler.sendEmptyMessage(HANDLER_NONE_NETWORK);
+			return;
+		}
 		DefaultHttpCallback callback = new DefaultHttpCallback(new DefaultHttpCallback.EventListener() {
 
 			@Override
@@ -139,6 +145,11 @@ public class HuodongListHttpController {
 	 * @param page
 	 */
 	public void obtainNearActivity(final int page) {
+		//TODO　没有网络就不网络请求了，直接返回
+		if (App.NetworkType.NONE.equals(App.getNetworkType())) {
+			handler.sendEmptyMessage(HANDLER_NONE_NETWORK);
+			return;
+		}
 		DefaultHttpCallback callback = new DefaultHttpCallback(new DefaultHttpCallback.EventListener() {
 
 			@Override
@@ -149,7 +160,12 @@ public class HuodongListHttpController {
 
 					List<BaseActivityMessage> lists = host1.parseJson(new JSONObject(str));
 
-					handler.sendMessage(handler.obtainMessage(HANDLER_REQUEST_LIST, page, 0, lists));
+					if (lists.size() > 0) {
+						handler.sendMessage(handler.obtainMessage(HANDLER_REQUEST_LIST, page, 0, lists));
+					}
+					else {
+						handler.sendEmptyMessage(HANDLER_REQUEST_LIST);
+					}
 				}
 				catch (Exception e) {
 					ELog.e("Exception:" + e.getMessage());
@@ -160,7 +176,6 @@ public class HuodongListHttpController {
 
 			@Override
 			public void onForceClose(ExceptionHttpResult result) {
-				handler.sendEmptyMessage(HANDLER_REQUEST_LIST);
 			}
 
 			@Override

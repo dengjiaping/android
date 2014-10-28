@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:paddingBottom="@dimen/padding_large" >
+    android:paddingBottom="@dimen/padding_large"
+    android:background="@drawable/white_and_grey_selector" >
 
-    <com.oumen.widget.image.shape.RoundRectangleImageView
+    <!--com.oumen.widget.image.shape.RoundRectangleImageView  -->
+    <ImageView
         android:id="@+id/photo"
         android:layout_width="@dimen/activitys_list_item_pic_size"
         android:layout_height="@dimen/activitys_list_item_pic_size"
