@@ -16,8 +16,9 @@ public class HuodongTypeUtil {
 	 * 0-->户外活动
 	 * 1-->室内活动
 	 * 3-->线上活动
-	 * 4-->附近活动
-	 * 5-->模糊查询
+	 * 3-->附近活动
+	 * 4-->模糊查询
+	 * 5-->城市查询
 	 */
 	public static final int CONDITION_HUWAI = 0;
 	public static final int CONDITION_SHINEI = 1;

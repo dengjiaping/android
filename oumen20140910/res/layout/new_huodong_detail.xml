@@ -95,9 +95,9 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="1dp"
                 android:layout_marginTop="@dimen/padding_super"
-                android:background="@color/default_line_bg" />
+                android:background="@color/default_bg_up" />
 
             <View
                 android:layout_width="match_parent"
@@ -106,132 +106,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/default_line_bg" />
-
-            <TextView
-                android:id="@+id/special_tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/padding_super"
-                android:layout_marginTop="@dimen/padding_super"
-                android:drawableLeft="@drawable/huodong_detail_feature"
-                android:drawablePadding="@dimen/padding_small"
-                android:gravity="center"
-                android:paddingLeft="@dimen/padding_large"
-                android:paddingRight="@dimen/padding_large"
-                android:text="特色推荐"
-                android:textColor="@color/detail_title_tip_text_bg"
-                android:textSize="@dimen/text_medium" />
-
-            <LinearLayout
-                android:id="@+id/spacial_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone" >
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/default_line_bg" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/default_line_bg" />
-
-            <RelativeLayout
-                android:id="@+id/pingfen_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/white_and_grey_selector"
-                android:clickable="true"
-                android:paddingLeft="@dimen/padding_large"
-                android:paddingRight="@dimen/padding_large" >
-
-                <TextView
-                    android:id="@+id/pingfen_tip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="@dimen/padding_super"
-                    android:layout_marginTop="@dimen/padding_super"
-                    android:drawableLeft="@drawable/huodong_detail_comment"
-                    android:drawablePadding="@dimen/padding_small"
-                    android:paddingRight="@dimen/padding_large"
-                    android:text="用户评价"
-                    android:textColor="@color/detail_title_tip_text_bg"
-                    android:textSize="@dimen/text_medium" />
-
-                <TextView
-                    android:id="@+id/pingfen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="@dimen/padding_super"
-                    android:layout_marginTop="@dimen/padding_super"
-                    android:layout_toRightOf="@+id/pingfen_tip"
-                    android:drawablePadding="@dimen/default_gap"
-                    android:drawableRight="@drawable/center_arrow"
-                    android:gravity="left"
-                    android:singleLine="true"
-                    android:textColor="@color/detail_content_text_bg"
-                    android:textSize="@dimen/text_pretty" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/last_comment_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/default_line_bg"
-                    android:paddingLeft="@dimen/padding_large" />
-
-                <TextView
-                    android:id="@+id/last_comment_nick"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_small"
-                    android:paddingLeft="@dimen/padding_super"
-                    android:paddingRight="@dimen/padding_large"
-                    android:paddingTop="@dimen/padding_large"
-                    android:singleLine="true"
-                    android:textColor="@color/detail_text_bg"
-                    android:textSize="@dimen/text_medium" />
-
-                <TextView
-                    android:id="@+id/last_comment_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="3"
-                    android:paddingBottom="@dimen/padding_large"
-                    android:paddingLeft="@dimen/padding_super"
-                    android:paddingRight="@dimen/padding_large"
-                    android:textColor="#FF676767"
-                    android:textSize="@dimen/text_pretty" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/default_line_bg" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/padding_large"
-                android:background="@color/default_container_bg" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/default_line_bg" />
+                android:layout_height="1dp"
+                android:background="@color/default_bg_up" />
 
             <RelativeLayout
                 android:id="@+id/address_container"
@@ -239,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/white_and_grey_selector"
                 android:clickable="true"
+                android:orientation="horizontal"
                 android:paddingLeft="@dimen/padding_large"
                 android:paddingRight="@dimen/padding_large" >
 
@@ -250,10 +127,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="@dimen/padding_super"
                     android:layout_marginTop="@dimen/padding_super"
-                    android:drawableLeft="@drawable/huodong_detail_location"
-                    android:drawablePadding="@dimen/padding_small"
-                    android:paddingRight="@dimen/padding_large"
-                    android:text="地址"
+                    android:text="地址："
                     android:textColor="@color/detail_title_tip_text_bg"
                     android:textSize="@dimen/text_medium" />
 
@@ -271,13 +145,13 @@
                     android:gravity="left"
                     android:singleLine="true"
                     android:textColor="@color/detail_content_text_bg"
-                    android:textSize="@dimen/text_pretty" />
+                    android:textSize="@dimen/text_medium" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1px"
+                    android:layout_height="1dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/default_line_bg" />
+                    android:background="@color/default_bg_up" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -286,6 +160,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:clickable="true"
+                android:orientation="horizontal"
                 android:paddingLeft="@dimen/padding_large"
                 android:paddingRight="@dimen/padding_large" >
 
@@ -297,10 +172,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="@dimen/padding_super"
                     android:layout_marginTop="@dimen/padding_super"
-                    android:drawableLeft="@drawable/huodong_detail_age"
-                    android:drawablePadding="@dimen/padding_small"
-                    android:paddingRight="@dimen/padding_large"
-                    android:text="适宜年龄"
+                    android:text="适宜年龄："
                     android:textColor="@color/detail_title_tip_text_bg"
                     android:textSize="@dimen/text_medium" />
 
@@ -316,13 +188,13 @@
                     android:gravity="left"
                     android:singleLine="true"
                     android:textColor="@color/detail_content_text_bg"
-                    android:textSize="@dimen/text_pretty" />
+                    android:textSize="@dimen/text_medium" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1px"
+                    android:layout_height="1dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/default_line_bg" />
+                    android:background="@color/default_bg_up" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -331,6 +203,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:clickable="true"
+                android:orientation="horizontal"
                 android:paddingLeft="@dimen/padding_large"
                 android:paddingRight="@dimen/padding_large" >
 
@@ -342,10 +215,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="@dimen/padding_super"
                     android:layout_marginTop="@dimen/padding_super"
-                    android:drawableLeft="@drawable/huodong_detail_time"
-                    android:drawablePadding="@dimen/padding_small"
-                    android:paddingRight="@dimen/padding_large"
-                    android:text="活动时间"
+                    android:text="活动时间："
                     android:textColor="@color/detail_title_tip_text_bg"
                     android:textSize="@dimen/text_medium" />
 
@@ -361,13 +231,58 @@
                     android:gravity="left"
                     android:singleLine="true"
                     android:textColor="@color/detail_content_text_bg"
-                    android:textSize="@dimen/text_pretty" />
+                    android:textSize="@dimen/text_medium" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1px"
+                    android:layout_height="1dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/default_line_bg" />
+                    android:background="@color/default_bg_up" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/pingfen_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/white_and_grey_selector"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_large"
+                android:paddingRight="@dimen/padding_large" >
+
+                <TextView
+                    android:id="@+id/pingfen_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="@dimen/padding_super"
+                    android:layout_marginTop="@dimen/padding_super"
+                    android:text="用户评价："
+                    android:textColor="@color/detail_title_tip_text_bg"
+                    android:textSize="@dimen/text_medium" />
+
+                <TextView
+                    android:id="@+id/pingfen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="@dimen/padding_super"
+                    android:layout_marginTop="@dimen/padding_super"
+                    android:layout_toRightOf="@+id/pingfen_tip"
+                    android:drawablePadding="@dimen/default_gap"
+                    android:drawableRight="@drawable/center_arrow"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:textColor="@color/detail_content_text_bg"
+                    android:textSize="@dimen/text_medium" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/default_bg_up" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -385,11 +300,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="@dimen/padding_super"
                     android:layout_marginTop="@dimen/padding_super"
-                    android:drawableLeft="@drawable/huodong_detail_content"
-                    android:drawablePadding="@dimen/padding_small"
                     android:paddingLeft="@dimen/padding_large"
-                    android:paddingRight="@dimen/padding_large"
-                    android:text="活动详情"
+                    android:text="活动介绍："
                     android:textColor="@color/detail_title_tip_text_bg"
                     android:textSize="@dimen/text_medium" />
 
@@ -408,7 +320,14 @@
                     android:paddingRight="@dimen/padding_large"
                     android:singleLine="true"
                     android:textColor="@color/detail_content_text_bg"
-                    android:textSize="@dimen/text_pretty" />
+                    android:textSize="@dimen/text_medium" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/default_bg_up"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <TextView
@@ -424,13 +343,18 @@
             <View
                 android:id="@+id/content_line"
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/default_line_bg" />
+                android:layout_height="1dp"
+                android:background="@color/default_bg_up" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/padding_large"
                 android:background="@color/default_container_bg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/default_bg_up" />
 
             <RelativeLayout
                 android:id="@+id/applyer_container"
@@ -438,11 +362,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/white_and_grey_selector"
                 android:clickable="true" >
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/default_line_bg" />
 
                 <TextView
                     android:id="@+id/applyer_tip"
@@ -452,11 +371,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="@dimen/padding_super"
                     android:layout_marginTop="@dimen/padding_super"
-                    android:drawableLeft="@drawable/huodong_detail_applyer"
-                    android:drawablePadding="@dimen/padding_small"
                     android:paddingLeft="@dimen/padding_large"
-                    android:paddingRight="@dimen/padding_large"
-                    android:text="已参与用户"
+                    android:text="已参与用户："
                     android:textColor="@color/detail_title_tip_text_bg"
                     android:textSize="@dimen/text_medium" />
 
@@ -475,13 +391,13 @@
                     android:paddingRight="@dimen/padding_large"
                     android:singleLine="true"
                     android:textColor="@color/detail_content_text_bg"
-                    android:textSize="@dimen/text_pretty" />
+                    android:textSize="@dimen/text_medium" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1px"
+                    android:layout_height="1dp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/default_line_bg" />
+                    android:background="@color/default_bg_up" />
             </RelativeLayout>
 
             <GridView
@@ -499,21 +415,6 @@
                 android:scrollbars="none"
                 android:verticalSpacing="4dp" >
             </GridView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/default_line_bg" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/default_container_bg"
-                android:gravity="center"
-                android:padding="@dimen/padding_large"
-                android:text="如有疑问请电话咨询"
-                android:textColor="@color/default_grey_text"
-                android:textSize="@dimen/text_small" />
         </LinearLayout>
     </ScrollView>
 

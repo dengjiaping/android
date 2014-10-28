@@ -18,7 +18,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 
 import com.oumen.activity.detail.HuodongDetailHeaderProvider;
-import com.oumen.activity.message.DetailActivityMessage;
+import com.oumen.activity.message.ActivityBean;
 import com.oumen.activity.message.UserActivityMessage;
 import com.oumen.android.App;
 import com.oumen.db.DatabaseHelper;
@@ -68,7 +68,7 @@ public class ActivityMessage implements Parcelable, HuodongDetailHeaderProvider 
 	
 	public ActivityMessage() {}
 	
-	public ActivityMessage(DetailActivityMessage bean){
+	public ActivityMessage(ActivityBean bean){
 		id = bean.getId();
 		title = bean.getName();
 		description = bean.getDescription();

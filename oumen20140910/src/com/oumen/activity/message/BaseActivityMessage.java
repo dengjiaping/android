@@ -12,39 +12,35 @@ public class BaseActivityMessage {
 	/*
 	 * 活动编号
 	 */
-	int activityId;
+	private int activityId;
 	/*
 	 * 活动名称
 	 */
-	String name;
+	private String name;
 	/*
 	 * 活动地址
 	 */
-	String address;
+	private String address;
 	/*
 	 * 活动城市
 	 */
-	String city;
+	private String city;
 	/*
 	 * 活动图片
 	 */
-	String picUrl;
+	private String picUrl;
 	/*
 	 * 活动价格
 	 */
-	String money;
+	private String money;
 	/*
 	 * 活动类型
-	 * 0-->户外活动
-	 * 1-->室内活动
-	 * 3-->线上活动
-	 * 4-->附近活动
 	 */
-	int HuodongType;
+	private int type;
 	/*
 	 *活动距离 
 	 */
-	int distance;
+	private int distance;
 	
 	public BaseActivityMessage() {}
 	
@@ -60,10 +56,8 @@ public class BaseActivityMessage {
 			city = json.getString("ctcode");
 		}
 		if (json.has("hdtypes")) {
-			HuodongType = json.getInt("hdtypes");
+			type = json.getInt("hdtypes");
 		}
-		
-		//TODO 活动详情没有此字段
 		if (json.has("distance")) {//活动列表返回
 			distance = json.getInt("distance");
 		}
@@ -132,11 +126,11 @@ public class BaseActivityMessage {
 	}
 
 	public int getType() {
-		return HuodongType;
+		return type;
 	}
 
 	public void setType(int type) {
-		this.HuodongType = type;
+		this.type = type;
 	}
 
 	public int getDistance() {

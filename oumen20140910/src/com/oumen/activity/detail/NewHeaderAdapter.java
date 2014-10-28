@@ -45,8 +45,9 @@ public class NewHeaderAdapter extends PagerAdapter {
 	
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
-		RectImageHasDownloadView item = new RectImageHasDownloadView(container.getContext());
+		CircleCornerImageHasDownloadView item = new CircleCornerImageHasDownloadView(container.getContext());
 		item.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		item.setViewPadding(0);
 		
 		if (TextUtils.isEmpty(datas.get(position).path)) {
 			item.getImageView().setImageResource(R.drawable.pic_default);

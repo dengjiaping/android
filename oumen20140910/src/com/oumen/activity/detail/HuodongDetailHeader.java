@@ -4,7 +4,7 @@ package com.oumen.activity.detail;
 import widget.viewpager.CirclePageIndicator;
 
 import com.oumen.R;
-import com.oumen.activity.message.DetailActivityMessage;
+import com.oumen.activity.message.ActivityBean;
 import com.oumen.android.App;
 import com.oumen.message.ActivityMessage;
 import com.oumen.tools.ELog;
@@ -63,8 +63,7 @@ public class HuodongDetailHeader extends FrameLayout {
 		
 		indicator = (CirclePageIndicator) findViewById(R.id.indicator);
 		indicator.setViewPager(viewpager);
-		indicator.setFillColor(getResources().getColor(R.color.white));
-//		indicator.setPageColor(getResources().getColor(R.color.default_bg));
+		indicator.setFillColor(getResources().getColor(R.color.detail_orange));
 		
 		setViewDefaultHeight(width);
 	}
@@ -80,9 +79,30 @@ public class HuodongDetailHeader extends FrameLayout {
 		viewpager.setLayoutParams(params);
 	}
 	
-	public void update(DetailActivityMessage provider) {
+	public void update(ActivityBean provider) {
 		title.setText(provider.getSenderName());
 		SpannableStringBuilder builder;
+		// TODO 
+		if ( provider.getHaoPing() == 0 && provider.getChaPing() == 0 ) {
+			builder = new SpannableStringBuilder();
+			builder.append("商家好评:100%");
+			ForegroundColorSpan colorSpen = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
+			builder.setSpan(colorSpen, "商家好评:".length(), ("商家好评:100%").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			AbsoluteSizeSpan sizeSpan = new AbsoluteSizeSpan(18 * 2);
+			builder.setSpan(sizeSpan, "商家好评:".length(), ("商家好评:100%").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			pingjia.setText(builder);
+		}
+		else {
+			ELog.i("provider.getHaoPing() = " + provider.getHaoPing() + ",provider.getChaPing() = " + provider.getChaPing());
+			int temp = (provider.getHaoPing()/(provider.getHaoPing() + provider.getChaPing())) * 100;
+			builder = new SpannableStringBuilder();
+			builder.append("商家好评:"+ temp +"%");
+			ForegroundColorSpan colorSpen = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
+			builder.setSpan(colorSpen, "商家好评:".length(), ("商家好评:"+ temp +"%").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			AbsoluteSizeSpan sizeSpan = new AbsoluteSizeSpan(18 * 2);
+			builder.setSpan(sizeSpan, "商家好评:".length(), ("商家好评:"+ temp +"%").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			pingjia.setText(builder);
+		}
 		
 		int size = provider.getHuodongPics().size();
 		if (size > 0) {

@@ -11,7 +11,7 @@
         android:layout_height="@dimen/activitys_list_item_pic_size"
         android:layout_margin="@dimen/padding_large"
         android:contentDescription="@string/image_description"
-        android:background="@drawable/pic_default" />
+        android:src="@drawable/pic_default" />
 
     <TextView
         android:id="@+id/name"

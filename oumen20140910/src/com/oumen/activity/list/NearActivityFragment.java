@@ -1,11 +1,8 @@
 package com.oumen.activity.list;
 
-import java.lang.ref.SoftReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,21 +14,19 @@ import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AbsListView.OnScrollListener;
 
 import com.ab.view.listener.AbOnListViewListener;
+import com.ab.view.pullview.AbPullListView;
 import com.oumen.R;
 import com.oumen.TitleBar;
 import com.oumen.activity.detail.HuoDongDetailActivity;
 import com.oumen.activity.message.BaseActivityMessage;
-import com.oumen.activity.widget.RefushListView;
 import com.oumen.android.App;
 import com.oumen.android.BaseFragment;
 import com.oumen.home.LoginConfrim;
@@ -48,7 +43,7 @@ public class NearActivityFragment extends BaseFragment {
 	private TitleBar titleBar;
 	private Button btnLeft;
 
-	private RefushListView lstView;
+	private AbPullListView lstView;
 
 	private final ActivityAdapter adapter = new ActivityAdapter();
 
@@ -59,12 +54,6 @@ public class NearActivityFragment extends BaseFragment {
 	private HuodongListHttpController controller;
 
 	private boolean firstFlag = true;
-	
-	private boolean scrollFlag = false;
-	
-	private int start_index = App.INT_UNSET;
-	private int end_index = App.INT_UNSET;
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -111,7 +100,7 @@ public class NearActivityFragment extends BaseFragment {
 
 		// ------------ListView-------------
 
-		lstView = (RefushListView) view.findViewById(R.id.refreshablelistview);
+		lstView = (AbPullListView) view.findViewById(R.id.refreshablelistview);
 		lstView.setBackgroundColor(getResources().getColor(R.color.white));
 		lstView.setDivider(new ColorDrawable(getResources().getColor(R.color.user_center_click_bg)));
 		lstView.setDividerHeight(1);
@@ -123,29 +112,6 @@ public class NearActivityFragment extends BaseFragment {
 		lstView.setEmptyView(emptyView);
 		lstView.setSelector(getResources().getDrawable(R.drawable.white_and_grey_selector));
 		lstView.setAbOnListViewListener(listViewListener);
-//		lstView.setOnTouchListener(new View.OnTouchListener() {
-//			
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				if(event.getAction() == MotionEvent.ACTION_MOVE && lstView.getScrollState() != OnScrollListener.SCROLL_STATE_FLING){
-//					start_index = lstView.getCurrentVisibleStartIndex();
-//					end_index = lstView.getCurrentVisibleEndIndex();
-//					scrollFlag = false;
-//					ELog.i("start_index =" + start_index + "end_index =" + end_index);
-//					for (; start_index < end_index; start_index++) {
-//						NearHuodongItem tempView = (NearHuodongItem)lstView.findViewWithTag(start_index);
-//						if (tempView != null) {
-//							tempView.updateImage(adapter.data.get(start_index));
-//						}
-//					}
-//                }
-//				else {
-//					ELog.i("scroll");
-//					scrollFlag = true;
-//				}
-//				return false;
-//			}
-//		});
 		return view;
 	}
 
@@ -188,16 +154,15 @@ public class NearActivityFragment extends BaseFragment {
 		return super.onBackPressed();
 	}
 
-	public List<BaseActivityMessage> parseJson(final JSONObject json) throws JSONException {
-		ELog.i("" + Thread.currentThread().getName());
+	public List<BaseActivityMessage> parseJson(JSONObject json) throws JSONException {
 		List<BaseActivityMessage> results = new LinkedList<BaseActivityMessage>();
 		JSONArray array = json.getJSONArray("data");
-		
+
 		for (int i = 0; i < array.length(); i++) {
 			JSONObject itemJson = array.getJSONObject(i);
 			results.add(new BaseActivityMessage(itemJson));
 		}
-		
+
 		if (adapter.isEmpty() && !results.isEmpty()) {
 			App.CACHE.save(CACHE_KEY, json.toString());
 		}
@@ -220,7 +185,7 @@ public class NearActivityFragment extends BaseFragment {
 						if (!results.isEmpty()) {
 							currentPage = msg.arg1;
 						}
-//						adapter.notifyDataSetChanged();
+						adapter.notifyDataSetChanged();
 					}
 					else if (msg.obj instanceof CharSequence) {
 						Toast.makeText(lstView.getContext(), (CharSequence) msg.obj, Toast.LENGTH_SHORT).show();
@@ -232,6 +197,13 @@ public class NearActivityFragment extends BaseFragment {
 				lstView.stopLoadMore();
 				dismissProgressDialog();
 				break;
+
+//			case HuodongListHttpController.HANDLER_UPDATE_PROGRESS:
+//				ELog.i("Update");
+//				synchronized (adapter) {
+//					adapter.notifyDataSetChanged();
+//				}
+//				break;
 		}
 		return false;
 	}
@@ -261,7 +233,6 @@ public class NearActivityFragment extends BaseFragment {
 	private class ActivityAdapter extends BaseAdapter {
 		private List<BaseActivityMessage> data = new ArrayList<BaseActivityMessage>();
 
-		BaseActivityMessage itemData = null;
 		@Override
 		public int getCount() {
 			return data.size();
@@ -287,12 +258,12 @@ public class NearActivityFragment extends BaseFragment {
 			else {
 				item = (NearHuodongItem) convertView;
 			}
-			
-			itemData = data.get(position);
+			BaseActivityMessage itemData = null;
+			synchronized (this) {
+				itemData = data.get(position);
+			}
 			item.setTag(itemData);
-			long time = System.currentTimeMillis();
 			item.update(itemData);
-			ELog.e("加载一页数据需要时间：" + (System.currentTimeMillis() - time));
 			return item;
 		}
 	}

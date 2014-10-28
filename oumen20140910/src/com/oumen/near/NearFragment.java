@@ -29,7 +29,7 @@ import android.widget.Toast;
 import com.oumen.R;
 import com.oumen.TitleBar;
 import com.oumen.activity.detail.HuoDongDetailActivity;
-import com.oumen.activity.message.DetailActivityMessage;
+import com.oumen.activity.message.ActivityBean;
 import com.oumen.activity.widget.IndexViewPager;
 import com.oumen.android.App;
 import com.oumen.android.BaseFragment;
@@ -240,9 +240,9 @@ public class NearFragment extends BaseFragment {
 				intent.putExtra(UserInfoActivity.INTENT_KEY_UID, result.getUser_id());
 				getActivity().startActivityForResult(intent, USERINFO_REQUEST_CODE);
 			}
-			else if (tag != null && tag instanceof DetailActivityMessage) {
+			else if (tag != null && tag instanceof ActivityBean) {
 				ELog.i("进入活动");
-				DetailActivityMessage result = (DetailActivityMessage) tag;
+				ActivityBean result = (ActivityBean) tag;
 				Intent intent = new Intent(getActivity(), HuoDongDetailActivity.class);
 				intent.putExtra(HuoDongDetailActivity.INTENT_KEY_ACTIVITY_ID, result.getId());
 				getActivity().startActivityForResult(intent, ACTIVITY_REQUEST_CODE);

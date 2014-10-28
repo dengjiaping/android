@@ -298,42 +298,42 @@ public class CircleItem extends LinearLayout implements View.OnClickListener {
 
 		// ===============================获取评论信息==================================
 		int commentCount = info.comments.size();
-//		if (commentCount > 0) {
-//			long time = System.currentTimeMillis();
-//			// 设置评论显示
-//			containerMessages.setVisibility(View.VISIBLE);
-//			lstComment.setVisibility(View.VISIBLE);
-//			lstComment.removeAllViews();
+		if (commentCount > 0) {
+			long time = System.currentTimeMillis();
+			// 设置评论显示
+			containerMessages.setVisibility(View.VISIBLE);
+			lstComment.setVisibility(View.VISIBLE);
+			lstComment.removeAllViews();
+
+			for (int i = 0; i < commentCount; i++) {
+				CircleItemData cmtItemData = new CircleItemData();
+				final CommentItem item = new CommentItem(getContext());
+				item.setOnClickListener(hostClickListener);
+				item.setTag(cmtItemData);
+				cmtItemData.groupIndex = itemData.groupIndex;
+				cmtItemData.groupData = itemData.groupData;
+				cmtItemData.commentIndex = i;
+				cmtItemData.commentData = info.comments.get(i);
+				final boolean isLast = i == (commentCount - 1);
+				item.update();
+//				item.post(new Runnable() {
 //
-//			for (int i = 0; i < commentCount; i++) {
-//				CircleItemData cmtItemData = new CircleItemData();
-//				final CommentItem item = new CommentItem(getContext());
-//				item.setOnClickListener(hostClickListener);
-//				item.setTag(cmtItemData);
-//				cmtItemData.groupIndex = itemData.groupIndex;
-//				cmtItemData.groupData = itemData.groupData;
-//				cmtItemData.commentIndex = i;
-//				cmtItemData.commentData = info.comments.get(i);
-//				final boolean isLast = i == (commentCount - 1);
-//				item.update();
-////				item.post(new Runnable() {
-////
-////					@Override
-////					public void run() {
-////						LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) item.getLayoutParams();
-////						params.height = isLast ? (item.getLineHeight() * item.getLineCount() + padding) : item.getLineHeight() * item.getLineCount() + lineGap;
-////						item.setLayoutParams(params);
-////					}
-////				});
-//				lstComment.addView(item);
-//			}
-//			ELog.e("加载评论需要时间：" + (System.currentTimeMillis() - time));
-//		}
-//		else {
-////			// 设置评论隐藏
-//			lstComment.removeAllViews();
+//					@Override
+//					public void run() {
+//						LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) item.getLayoutParams();
+//						params.height = isLast ? (item.getLineHeight() * item.getLineCount() + padding) : item.getLineHeight() * item.getLineCount() + lineGap;
+//						item.setLayoutParams(params);
+//					}
+//				});
+				lstComment.addView(item);
+			}
+			ELog.e("加载评论需要时间：" + (System.currentTimeMillis() - time));
+		}
+		else {
+//			// 设置评论隐藏
+			lstComment.removeAllViews();
 			lstComment.setVisibility(View.GONE);
-//		}
+		}
 		// ===========================设置赞的人数初始化====================================
 		ArrayList<Prise> prises = info.prises;
 		if (prises != null && prises.size() > 0) {

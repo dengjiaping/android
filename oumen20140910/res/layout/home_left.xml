@@ -89,13 +89,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/leftnav_message_circle_selector"
+                android:drawableLeft="@drawable/leftnav_circle_selector"
                 android:drawablePadding="@dimen/default_gap"
                 android:gravity="center_vertical"
                 android:paddingBottom="@dimen/default_gap"
                 android:paddingLeft="@dimen/default_big_gap"
                 android:paddingTop="@dimen/default_gap"
-                android:text="@string/msg_recommend_title_default"
+                android:text="@string/tab_messages"
                 android:textColor="@color/white"
                 android:textSize="@dimen/default_editsize_big" />
 
@@ -283,7 +283,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/left_city_btnselector"
-        android:drawableLeft="@drawable/leftnav_location"
+        android:drawableLeft="@drawable/center_location"
         android:drawableRight="@drawable/center_arrow"
         android:gravity="center_vertical"
         android:paddingBottom="@dimen/default_gap"

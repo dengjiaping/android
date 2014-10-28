@@ -16,7 +16,7 @@ import com.oumen.R;
 import com.oumen.activity.PushActivityListActivity;
 import com.oumen.activity.detail.HeaderAdapter;
 import com.oumen.activity.detail.HuodongDetailHeaderProvider;
-import com.oumen.activity.message.DetailActivityMessage;
+import com.oumen.activity.message.ActivityBean;
 import com.oumen.android.App;
 import com.oumen.message.ActivityMessage;
 import com.oumen.widget.file.ImageData;
@@ -96,8 +96,8 @@ public class ActivityDetailHeaderView extends LinearLayout implements PushActivi
 	}
 	
 	public void update(HuodongDetailHeaderProvider provider) {
-		if (provider instanceof DetailActivityMessage) {
-			DetailActivityMessage bean = (DetailActivityMessage) provider;
+		if (provider instanceof ActivityBean) {
+			ActivityBean bean = (ActivityBean) provider;
 			data = new ActivityMessage();
 			data.setId(bean.getId());
 			data.setTitle(provider.getHuodongTitle());
