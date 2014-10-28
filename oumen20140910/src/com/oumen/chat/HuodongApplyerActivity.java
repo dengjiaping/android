@@ -18,7 +18,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.oumen.R;
 import com.oumen.TitleBar;
 import com.oumen.activity.detail.HuodongHttpController;
-import com.oumen.activity.message.ActivityBean;
+import com.oumen.activity.message.DetailActivityMessage;
 import com.oumen.android.App;
 import com.oumen.android.BaseActivity;
 import com.oumen.home.LoginConfrim;
@@ -72,7 +72,7 @@ public class HuodongApplyerActivity extends BaseActivity {
 
 	private ApplyerGridAdapter adapter;
 
-	private ActivityBean bean;
+	private DetailActivityMessage bean;
 
 	private HuodongHttpController controller;
 
@@ -286,7 +286,7 @@ public class HuodongApplyerActivity extends BaseActivity {
 		}
 	}
 
-	private void update(ActivityBean bean) {
+	private void update(DetailActivityMessage bean) {
 		if (bean == null)
 			return;
 		synchronized (adapter) {

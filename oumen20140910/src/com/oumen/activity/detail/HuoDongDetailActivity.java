@@ -29,6 +29,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,8 +38,9 @@ import com.oumen.R;
 import com.oumen.TitleBar;
 import com.oumen.activity.BasicMapActivity;
 import com.oumen.activity.HuodongTypeUtil;
+import com.oumen.activity.detail.comment.Comment;
 import com.oumen.activity.detail.comment.CommentActivity;
-import com.oumen.activity.message.ActivityBean;
+import com.oumen.activity.message.DetailActivityMessage;
 import com.oumen.android.App;
 import com.oumen.android.BaseActivity;
 import com.oumen.android.util.Constants;
@@ -61,7 +63,6 @@ import com.oumen.message.SendType;
 import com.oumen.message.Type;
 import com.oumen.tools.ELog;
 import com.oumen.widget.dialog.TwoButtonDialog;
-import com.oumen.widget.dialog.VerticalTwoButtonDialog;
 
 /**
  * 
@@ -71,7 +72,7 @@ import com.oumen.widget.dialog.VerticalTwoButtonDialog;
 public class HuoDongDetailActivity extends BaseActivity implements FloatViewHostController, View.OnTouchListener {
 	public static final String INTENT_KEY_ACTIVITY_ID = "activity_id";
 	public static final String INTENT_KEY_ACTIVITY_TYPE = "activity_type";
-	
+
 	private final int RESULT_FROM_APPLYER_LIST = 1;
 
 	//保存activityBean
@@ -90,6 +91,12 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 
 	private TextView title, price, sender;
 	private TextView applyerStopTime, applyerStopContent;
+
+	private TextView specialBar;
+	private LinearLayout specialContainer;
+	private LinearLayout lastCommentContainer;
+	private TextView lastCommentNick, lastCommentContent;
+
 	private RelativeLayout addressBar;
 	private TextView address, suitableAge, period;
 
@@ -109,18 +116,18 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 	private FrameLayout popupLayer;
 
 	private final ApplyerGridAdapter adapter = new ApplyerGridAdapter();
-	
-	private ActivityBean activityBean = null;
+
+	private DetailActivityMessage activityBean = null;
 
 	// 分享的popwindow
 	private ShareView viewShare;
-	//评分弹出框
-	private VerticalTwoButtonDialog priseDialog;
+//	评分弹出框
+//	private VerticalTwoButtonDialog priseDialog;
 
 	private ActivityMessage activityMsg;
-	
+
 	private int activityId;
-	
+
 	private LoginConfrim loginconfrim;
 
 	private HuodongHttpController controller;
@@ -182,6 +189,16 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 		applyerStopTime = (TextView) findViewById(R.id.aplyer_stop_time);//TODO 
 		applyerStopContent = (TextView) findViewById(R.id.stop_content);
 
+		specialBar = (TextView) findViewById(R.id.special_tip);
+		specialBar.setVisibility(View.GONE);
+		specialContainer = (LinearLayout) findViewById(R.id.spacial_container);
+		specialContainer.setVisibility(View.GONE);
+
+		lastCommentContainer = (LinearLayout) findViewById(R.id.last_comment_container);
+		lastCommentNick = (TextView) findViewById(R.id.last_comment_nick);
+		lastCommentContent = (TextView) findViewById(R.id.last_comment_content);
+		lastCommentContainer.setVisibility(View.GONE);
+
 		addressBar = (RelativeLayout) findViewById(R.id.address_container);
 		address = (TextView) findViewById(R.id.address);
 		suitableAge = (TextView) findViewById(R.id.age);
@@ -197,10 +214,12 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 //		content.setVisibility(View.GONE);
 
 		rlApplyerBar = (RelativeLayout) findViewById(R.id.applyer_container);
+		rlApplyerBar.setVisibility(View.GONE);
 		applyerDescrible = (TextView) findViewById(R.id.applyer);
 
 		gridViewApplyers = (GridView) findViewById(R.id.gridview);
 		gridViewApplyers.setAdapter(adapter);
+		gridViewApplyers.setVisibility(View.GONE);
 
 		//底部
 		btnApply = (Button) findViewById(R.id.apply);
@@ -316,7 +335,7 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 //				else {
 //					apply(activityBean.getId());
 //				}
-				if (activityBean.getType() == HuodongTypeUtil.CONDITION_XIANSHANG) {
+				if (activityBean.getHuodongType() == HuodongTypeUtil.CONDITION_XIANSHANG) {
 					if (activityBean.isApply() || activityBean.getSenderUid() == App.PREFS.getUid()) {
 //						openChatActivity();
 						Toast.makeText(HuoDongDetailActivity.this, "已报名成功", Toast.LENGTH_SHORT).show();
@@ -341,13 +360,12 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 			}
 			else if (v == pingfenBar) {
 				// TODO 判断是否需要弹出好评的dialog
-//				if (activityBean.isStartPingfen()) {
-//					controller.checkNeedPingFen(activityId);
-//				}
-				Intent intent = new Intent(HuoDongDetailActivity.this, CommentActivity.class);
-				intent.putExtra(CommentActivity.INTENT_HUODONG_ID, activityId);
-				intent.putExtra(CommentActivity.INTENT_HUODONG_APPLY, activityBean.isApply());
-				startActivity(intent);
+				if (activityBean.getRate() > 0) {
+					Intent intent = new Intent(HuoDongDetailActivity.this, CommentActivity.class);
+					intent.putExtra(CommentActivity.INTENT_HUODONG_ID, activityId);
+					intent.putExtra(CommentActivity.INTENT_HUODONG_APPLY, activityBean.isApply());
+					startActivity(intent);
+				}
 			}
 		}
 	};
@@ -358,8 +376,8 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 			case HANDLER_GET_DETAIL:
 				dismissProgressDialog();
 				if (msg.obj != null) {
-					if (msg.obj instanceof ActivityBean) {
-						activityBean = (ActivityBean) msg.obj;
+					if (msg.obj instanceof DetailActivityMessage) {
+						activityBean = (DetailActivityMessage) msg.obj;
 						adapter.data.clear();
 						int count = activityBean.applyers.size() < 5 ? activityBean.applyers.size() : 5;
 						for (int i = 0; i < count; i++) {
@@ -406,42 +424,42 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 					Toast.makeText(HuoDongDetailActivity.this, (String) msg.obj, Toast.LENGTH_SHORT).show();
 				}
 				break;
-			case HuodongHttpController.HANDLER_NEED_PING_FEN:// 需要评分
-				if (priseDialog == null) {
-					priseDialog = new VerticalTwoButtonDialog(HuoDongDetailActivity.this);
-					priseDialog.getTitleView().setText("活动评价");
-					priseDialog.getMessageView().setText(R.string.huodong_detail_prise_tip);
-					priseDialog.getTopButton().setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {// 好评
-							activityBean.setHaoPing(activityBean.getHaoPing() + 1);
-							controller.setPingfen(activityId, 1);
-							priseDialog.dismiss();
-						}
-					});
-
-					priseDialog.getButtomButton().setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {// 差评
-							activityBean.setChaPing(activityBean.getChaPing() + 1);
-							controller.setPingfen(activityId, 0);
-							priseDialog.dismiss();
-						}
-					});
-				}
-				priseDialog.show();
-				break;
+//			case HuodongHttpController.HANDLER_NEED_PING_FEN:// 需要评分
+//				if (priseDialog == null) {
+//					priseDialog = new VerticalTwoButtonDialog(HuoDongDetailActivity.this);
+//					priseDialog.getTitleView().setText("活动评价");
+//					priseDialog.getMessageView().setText(R.string.huodong_detail_prise_tip);
+//					priseDialog.getTopButton().setOnClickListener(new OnClickListener() {
+//
+//						@Override
+//						public void onClick(View v) {// 好评
+//							activityBean.setHaoPing(activityBean.getHaoPing() + 1);
+//							controller.setPingfen(activityId, 1);
+//							priseDialog.dismiss();
+//						}
+//					});
+//
+//					priseDialog.getButtomButton().setOnClickListener(new OnClickListener() {
+//
+//						@Override
+//						public void onClick(View v) {// 差评
+//							activityBean.setChaPing(activityBean.getChaPing() + 1);
+//							controller.setPingfen(activityId, 0);
+//							priseDialog.dismiss();
+//						}
+//					});
+//				}
+//				priseDialog.show();
+//				break;
 
 			case HuodongHttpController.HANDLER_NO_NEED_PING_FEN://不需要评分
 				Toast.makeText(mBaseApplication, (String) msg.obj, Toast.LENGTH_SHORT).show();
 				break;
 
-			case HuodongHttpController.HANDLER_PINGFEN_SUCCESS:// 评分成功
-				// 修改对应的文字
-				setHaoping();
-				break;
+//			case HuodongHttpController.HANDLER_PINGFEN_SUCCESS:// 评分成功
+//				// 修改对应的文字
+//				setHaoping();
+//				break;
 
 			case HuodongHttpController.HANDLER_PINGFEN_FAIL: //评分失败
 				Toast.makeText(mBaseApplication, (String) msg.obj, Toast.LENGTH_SHORT).show();
@@ -454,204 +472,213 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 	 * 添加初始化数据
 	 */
 	private void update() {
-		if (activityBean != null) {
-			//TODO 更新头部信息
-			header.update(activityBean);
-			
-			if (activityBean.getType() == HuodongTypeUtil.CONDITION_XIANSHANG) {
-				addressBar.setVisibility(View.GONE);
-				btnApply.setText("立即参加");
-				
-				// TODO 
-				/*
-				 * 1.如果本活动是自己发起的，就显示“进入群聊”
-				 * 2.如果报名人数已购，就显示“名额已满”
-				 * 3.如果时间过了报名截止时间，就显示“报名已截止”
-				 * 4.如果已经报名了，就显示“已报名，直接进入活动群”
-				 */
-				if (activityBean.getLimitNum().matches(Constants.PATTERN_NUMBER)) {
-					if (activityBean.applyers.size() == Integer.valueOf(activityBean.getLimitNum())) {
-						btnApply.setText("名额已满");
-						btnApply.setBackgroundColor(getResources().getColor(R.color.detail_apply_grey));
-						btnApply.setTextColor(getResources().getColor(R.color.detail_apply_grey_text));
-						btnApply.setClickable(false);
-					}
-				}
-
-				try {
-					Date timeTip = App.YYYY_MM_DD_HH_MM_FORMAT.parse(activityBean.getApplyEndTime());
-					if (App.getServerTime() / 1000 - timeTip.getTime() / 1000 >= 0) {// 报名截止
-						btnApply.setText("报名已截止");
-						btnApply.setBackgroundColor(getResources().getColor(R.color.detail_apply_grey));
-						btnApply.setTextColor(getResources().getColor(R.color.detail_apply_grey_text));
-						btnApply.setClickable(false);
-					}
-				}
-				catch (ParseException e) {
-					e.printStackTrace();
-				}
-
-				if (activityBean.getSenderUid() == App.PREFS.getUid()) {
-					btnApply.setClickable(true);
-					btnApply.setText(getResources().getString(R.string.activity_apply_sender_success));
-				}
-				else if (activityBean.isApply()) {
-					btnApply.setClickable(true);
-					btnApply.setText(getResources().getString(R.string.activity_apply_success));
-				}
+		if (activityBean == null)
+			return;
+		//更新头部信息
+		header.update(activityBean);
+		//自主活动由参与列表，第三方没有参与列表
+		if (activityBean.getType() == DetailActivityMessage.ACTIVITY_TYPE_OF_OUMEN) {
+			rlApplyerBar.setVisibility(View.VISIBLE);
+			gridViewApplyers.setVisibility(View.VISIBLE);
+		}
+		else {
+			rlApplyerBar.setVisibility(View.GONE);
+			gridViewApplyers.setVisibility(View.GONE);
+		}
+		//如果特色集合的长度>0
+		if (activityBean.commends.size() > 0) {
+			specialBar.setVisibility(View.VISIBLE);
+			specialContainer.setVisibility(View.VISIBLE);
+			for(int i = 0; i< activityBean.commends.size(); i++) {
+				TextView textview = new TextView(HuoDongDetailActivity.this);
+				textview.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+				textview.setCompoundDrawablesRelativeWithIntrinsicBounds(getResources().getDrawable(R.drawable.red_round_button_default), null, null, null);
+				textview.setText(activityBean.commends.get(i));
+				specialContainer.addView(textview);
+			}
+		}
+		else {
+			specialBar.setVisibility(View.GONE);
+			specialContainer.setVisibility(View.GONE);
+		}
+		
+		Comment tempComment = activityBean.getLastComment();
+		if ( tempComment!= null) {
+			lastCommentContainer.setVisibility(View.VISIBLE);
+			lastCommentNick.setText(tempComment.getNickName());
+			lastCommentContent.setText(tempComment.getContent());
+			if (tempComment.getPriseType() == Comment.PRISE_TYPE_HAOPING) {
+				lastCommentNick.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.huodong_comment_haoping), null);
 			}
 			else {
-				addressBar.setVisibility(View.VISIBLE);
-				btnApply.setText("立即购买");
+				lastCommentNick.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.huodong_comment_chaping), null);
 			}
+		}
 
-			ELog.i(activityBean.getPicSourceUrl());
-			ELog.i("---->" + activityBean.getHuodongId());
-			title.setText(activityBean.getName());
-			//activityBean.getMoney().startsWith("0")
-			if ("0".equals(activityBean.getMoney())) {
-				builder = new SpannableStringBuilder();
-				String str = "免费" + " 活动由商家提供";
-				builder.append(str);
-				ForegroundColorSpan tipColorSpan = new ForegroundColorSpan(getResources().getColor(R.color.detail_free_tip));
-				AbsoluteSizeSpan tipSizeSpen = new AbsoluteSizeSpan(21 * 2);
-				builder.setSpan(tipColorSpan, 0, "免费".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				builder.setSpan(tipSizeSpen, 0, "免费".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-				ForegroundColorSpan contentColorSpan = new ForegroundColorSpan(getResources().getColor(R.color.detail_free_content));
-				AbsoluteSizeSpan contentSizeSpen = new AbsoluteSizeSpan(16 * 2);
-				builder.setSpan(contentColorSpan, "免费".length(), str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				builder.setSpan(contentSizeSpen, "免费".length(), str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-				price.setText(builder);
+		// 线上活动没有地址，隐藏地址栏
+		if (activityBean.getHuodongType() == HuodongTypeUtil.CONDITION_XIANSHANG) {
+			addressBar.setVisibility(View.GONE);
+			btnApply.setText("立即参加");
+			/*
+			 * 2.如果报名人数已购，就显示“名额已满”
+			 * 3.如果时间过了报名截止时间，就显示“报名已截止”
+			 * 4.如果已经报名了，就显示“已报名，直接进入活动群”
+			 */
+			if (activityBean.getLimitNum().matches(Constants.PATTERN_NUMBER)) {
+				if (activityBean.applyers.size() == Integer.valueOf(activityBean.getLimitNum())) {
+					btnApply.setText("名额已满");
+					btnApply.setBackgroundColor(getResources().getColor(R.color.detail_apply_grey));
+					btnApply.setTextColor(getResources().getColor(R.color.detail_apply_grey_text));
+					btnApply.setClickable(false);
+				}
 			}
-			else {
-				price.setText("¥" + activityBean.getMoney() + "元");
-			}
-
-			sender.setText(activityBean.getSenderName());
-
-			setHaoping();
 
 			try {
-				//===============================================================================================
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(App.YYYY_MM_DD_HH_MM_FORMAT.parse(activityBean.getApplyEndTime()));
-
-				String str = calendar.get(Calendar.YEAR) + "年\n" + calendar.get(Calendar.MONTH) + "月" + calendar.get(Calendar.DAY_OF_MONTH) + "日\n报名截止";
-				builder = new SpannableStringBuilder();
-				builder.append(str);
-				AbsoluteSizeSpan sizeSpan = new AbsoluteSizeSpan(22 * 2);
-				int len = (calendar.get(Calendar.YEAR) + "年\n").length();
-				builder.setSpan(sizeSpan, len, len + (calendar.get(Calendar.MONTH) + "月" + +calendar.get(Calendar.DAY_OF_MONTH) + "日\n").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				applyerStopTime.setText(builder);
-
-				Calendar startTime = Calendar.getInstance();
-				Calendar endTime = Calendar.getInstance();
-				startTime.setTime(App.YYYY_MM_DD_HH_MM_FORMAT.parse(activityBean.getStartTime()));
-				endTime.setTime(App.YYYY_MM_DD_HH_MM_FORMAT.parse(activityBean.getEndTime()));
-				long hours = (endTime.getTimeInMillis() - startTime.getTimeInMillis()) / (1000 * 60 * 60);
-
-				String str1 = null;
-				builder = new SpannableStringBuilder();
-				if (activityBean.getLimitNum().matches(Constants.PATTERN_NUMBER)) {
-					int len1 = Integer.valueOf(activityBean.getLimitNum()) - activityBean.applyers.size();
-					if (len1 < 0) {
-						len1 = 0;
-					}
-					str1 = "仅剩" + String.valueOf(len1) + "个名额\n";
-					String tempStr = str1 + hours / 24 + "天" + hours % 24 + "小时结束";
-					builder.append(tempStr);
-					ForegroundColorSpan colorSpen = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
-					builder.setSpan(colorSpen, "仅剩".length(), ("仅剩" + String.valueOf(len1)).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-					ForegroundColorSpan colorSpen1 = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
-					builder.setSpan(colorSpen1, str1.length(), tempStr.length() - 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				Date timeTip = App.YYYY_MM_DD_HH_MM_FORMAT.parse(activityBean.getApplyEndTime());
+				if (App.getServerTime() / 1000 - timeTip.getTime() / 1000 >= 0) {// 报名截止
+					btnApply.setText("报名已截止");
+					btnApply.setBackgroundColor(getResources().getColor(R.color.detail_apply_grey));
+					btnApply.setTextColor(getResources().getColor(R.color.detail_apply_grey_text));
+					btnApply.setClickable(false);
 				}
-				else {
-					str1 = "不限名额\n";
-					String tempStr = str1 + hours / 24 + "天" + hours % 24 + "小时结束";
-					builder.append(tempStr);
-					ForegroundColorSpan colorSpen1 = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
-					builder.setSpan(colorSpen1, str1.length(), tempStr.length() - 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-				}
-				applyerStopContent.setText(builder);
-
-				String str2 = (startTime.get(Calendar.MONTH) + 1) + "月" + startTime.get(Calendar.DAY_OF_MONTH) + "日 — " + (endTime.get(Calendar.MONTH) + 1) + "月" + endTime.get(Calendar.DAY_OF_MONTH) + "日";
-				period.setText(str2);
 			}
 			catch (ParseException e) {
 				e.printStackTrace();
 			}
-			// 活动详情，适宜年龄，人数限制，咨询电话，费用
-			if (!TextUtils.isEmpty(activityBean.getApplyaAge())) {
-				int type = Integer.valueOf(activityBean.getApplyaAge());
-				switch (type) {
-					case 0:
-						suitableAge.setText("准备怀孕");
-						break;
-					case 1:
-						suitableAge.setText("怀孕期");
-						break;
-					case 2:
-						suitableAge.setText("0-1岁");
-						break;
-					case 3:
-						suitableAge.setText("1-3岁");
-						break;
-					case 4:
-						suitableAge.setText("3-6岁");
-						break;
-					case 5:
-						suitableAge.setText("6岁以上");
-						break;
-					case 6:
-						suitableAge.setText("不限");
-						break;
-					default:
-						suitableAge.setText("不限");
-						break;
-				}
-			}
-			else {
-				suitableAge.setText("不限");
-			}
-			// 活动描述
-			content.setText(activityBean.getDescription());
-			// 目前参加人数，和总人数
-			builder = new SpannableStringBuilder();
-			String tStr = activityBean.getApplyNum() + "/" + activityBean.getLimitNum();
-			builder.append(tStr);
-			ForegroundColorSpan colorSpen1 = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
-			builder.setSpan(colorSpen1, 0, String.valueOf(activityBean.applyers.size()).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			applyerDescrible.setText(builder);
 
-			// TODO 判断是否显示评分(如果为发起方，就不显示)
-			address.setText(activityBean.getAddress());
-		}
-	}
-
-	public void setHaoping() {
-		if (activityBean.getHaoPing() == 0 && activityBean.getChaPing() == 0) {
-			builder = new SpannableStringBuilder();
-			builder.append("好评率:100%");
-			ForegroundColorSpan colorSpen = new ForegroundColorSpan(getResources().getColor(R.color.default_bg));
-			builder.setSpan(colorSpen, "好评率:".length(), ("好评率:100%").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			AbsoluteSizeSpan sizeSpan = new AbsoluteSizeSpan(18 * 2);
-			builder.setSpan(sizeSpan, "好评率:".length(), ("好评率:100%").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			pingfen.setText(builder);
+			if (activityBean.getSenderUid() == App.PREFS.getUid()) {
+				btnApply.setClickable(true);
+				btnApply.setText(getResources().getString(R.string.activity_apply_sender_success));
+			}
+			else if (activityBean.isApply()) {
+				btnApply.setClickable(true);
+				btnApply.setText(getResources().getString(R.string.activity_apply_success));
+			}
 		}
 		else {
-			ELog.i("provider.getHaoPing() = " + activityBean.getHaoPing() + ",provider.getChaPing() = " + activityBean.getChaPing());
-			int temp = (activityBean.getHaoPing() / (activityBean.getHaoPing() + activityBean.getChaPing())) * 100;
-			builder = new SpannableStringBuilder();
-			builder.append("好评率" + temp + "%");
-			ForegroundColorSpan colorSpen = new ForegroundColorSpan(getResources().getColor(R.color.default_bg));
-			builder.setSpan(colorSpen, "好评率".length(), ("好评率" + temp + "%").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			AbsoluteSizeSpan sizeSpan = new AbsoluteSizeSpan(18 * 2);
-			builder.setSpan(sizeSpan, "好评率".length(), ("好评率" + temp + "%").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			pingfen.setText(builder);
+			addressBar.setVisibility(View.VISIBLE);
+			btnApply.setText("立即购买");
 		}
+
+		title.setText(activityBean.getName());
+		
+		if ("0".equals(activityBean.getMoney())) {
+			builder = new SpannableStringBuilder();
+			String str = "免费" + " 活动由商家提供";
+			builder.append(str);
+			ForegroundColorSpan tipColorSpan = new ForegroundColorSpan(getResources().getColor(R.color.detail_free_tip));
+			AbsoluteSizeSpan tipSizeSpen = new AbsoluteSizeSpan(21 * 2);
+			builder.setSpan(tipColorSpan, 0, "免费".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			builder.setSpan(tipSizeSpen, 0, "免费".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+			ForegroundColorSpan contentColorSpan = new ForegroundColorSpan(getResources().getColor(R.color.detail_free_content));
+			AbsoluteSizeSpan contentSizeSpen = new AbsoluteSizeSpan(16 * 2);
+			builder.setSpan(contentColorSpan, "免费".length(), str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			builder.setSpan(contentSizeSpen, "免费".length(), str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+			price.setText(builder);
+		}
+		else {
+			price.setText("¥" + activityBean.getMoney() + "元");
+		}
+
+		sender.setText(activityBean.getSenderName());
+
+		pingfen.setText("好评率" + App.RATE_FORMAT.format(activityBean.getRate()) + "%");
+
+		long time = System.currentTimeMillis();
+		try {
+			//===============================================================================================
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(App.YYYY_MM_DD_HH_MM_FORMAT.parse(activityBean.getApplyEndTime()));
+
+			String str = calendar.get(Calendar.YEAR) + "年\n" + calendar.get(Calendar.MONTH) + "月" + calendar.get(Calendar.DAY_OF_MONTH) + "日\n报名截止";
+			builder = new SpannableStringBuilder();
+			builder.append(str);
+			AbsoluteSizeSpan sizeSpan = new AbsoluteSizeSpan(22 * 2);
+			int len = (calendar.get(Calendar.YEAR) + "年\n").length();
+			builder.setSpan(sizeSpan, len, len + (calendar.get(Calendar.MONTH) + "月" + +calendar.get(Calendar.DAY_OF_MONTH) + "日\n").length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			applyerStopTime.setText(builder);
+
+			Calendar startTime = Calendar.getInstance();
+			Calendar endTime = Calendar.getInstance();
+			startTime.setTime(App.YYYY_MM_DD_HH_MM_FORMAT.parse(activityBean.getStartTime()));
+			endTime.setTime(App.YYYY_MM_DD_HH_MM_FORMAT.parse(activityBean.getEndTime()));
+			long hours = (endTime.getTimeInMillis() - startTime.getTimeInMillis()) / (1000 * 60 * 60);
+
+			String str1 = null;
+			builder = new SpannableStringBuilder();
+			if (activityBean.getLimitNum().matches(Constants.PATTERN_NUMBER)) {
+				int len1 = Integer.valueOf(activityBean.getLimitNum()) - activityBean.applyers.size();
+				if (len1 < 0) {
+					len1 = 0;
+				}
+				str1 = "仅剩" + String.valueOf(len1) + "个名额\n";
+				String tempStr = str1 + hours / 24 + "天" + hours % 24 + "小时结束";
+				builder.append(tempStr);
+				ForegroundColorSpan colorSpen = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
+				builder.setSpan(colorSpen, "仅剩".length(), ("仅剩" + String.valueOf(len1)).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ForegroundColorSpan colorSpen1 = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
+				builder.setSpan(colorSpen1, str1.length(), tempStr.length() - 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
+			else {
+				str1 = "不限名额\n";
+				String tempStr = str1 + hours / 24 + "天" + hours % 24 + "小时结束";
+				builder.append(tempStr);
+				ForegroundColorSpan colorSpen1 = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
+				builder.setSpan(colorSpen1, str1.length(), tempStr.length() - 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+			}
+			applyerStopContent.setText(builder);
+
+//				String str2 = (startTime.get(Calendar.MONTH) + 1) + "月" + startTime.get(Calendar.DAY_OF_MONTH) + "日 — " + (endTime.get(Calendar.MONTH) + 1) + "月" + endTime.get(Calendar.DAY_OF_MONTH) + "日";
+			String str2 = activityBean.getStartTime().substring(5, activityBean.getStartTime().length()) + " 至 " + activityBean.getEndTime().substring(5, activityBean.getEndTime().length());
+			period.setText(str2);
+		}
+		catch (ParseException e) {
+			e.printStackTrace();
+		}
+		ELog.e("加载需要：" + (System.currentTimeMillis() - time));
+		// 活动详情，适宜年龄，人数限制，咨询电话，费用
+		switch (activityBean.getApplyaAge()) {
+			case 0:
+				suitableAge.setText("准备怀孕");
+				break;
+			case 1:
+				suitableAge.setText("怀孕期");
+				break;
+			case 2:
+				suitableAge.setText("0-1岁");
+				break;
+			case 3:
+				suitableAge.setText("1-3岁");
+				break;
+			case 4:
+				suitableAge.setText("3-6岁");
+				break;
+			case 5:
+				suitableAge.setText("6岁以上");
+				break;
+			case 6:
+				suitableAge.setText("不限");
+				break;
+			default:
+				suitableAge.setText("不限");
+				break;
+		}
+		// 活动描述
+		content.setText(activityBean.getDescription());
+		// 目前参加人数，和总人数
+		builder = new SpannableStringBuilder();
+		String tStr = activityBean.getApplyNum() + "/" + activityBean.getLimitNum();
+		builder.append(tStr);
+		ForegroundColorSpan colorSpen1 = new ForegroundColorSpan(getResources().getColor(R.color.detail_orange));
+		builder.setSpan(colorSpen1, 0, String.valueOf(activityBean.applyers.size()).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		applyerDescrible.setText(builder);
+
+		// TODO 判断是否显示评分(如果为发起方，就不显示)
+		address.setText(activityBean.getAddress());
+
 	}
 
 	/**
@@ -720,7 +747,7 @@ public class HuoDongDetailActivity extends BaseActivity implements FloatViewHost
 
 				JSONObject obj = new JSONObject(str);
 				activityMsg = new ActivityMessage(obj, ActivityMessage.FROM_HTTP);
-				ActivityBean bean = new ActivityBean(obj);
+				DetailActivityMessage bean = new DetailActivityMessage(obj);
 
 				handler.sendMessage(handler.obtainMessage(HANDLER_GET_DETAIL, bean));
 			}

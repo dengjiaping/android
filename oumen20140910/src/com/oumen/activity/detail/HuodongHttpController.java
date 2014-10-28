@@ -6,7 +6,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import com.oumen.activity.message.ActivityBean;
+import com.oumen.activity.message.DetailActivityMessage;
 import com.oumen.android.App;
 import com.oumen.android.util.Constants;
 import com.oumen.http.DefaultHttpCallback;
@@ -61,7 +61,7 @@ public class HuodongHttpController {
 
 				JSONObject obj = new JSONObject(str);
 //				activityMsg = new ActivityMessage(obj, ActivityMessage.FROM_HTTP);
-				ActivityBean bean = new ActivityBean(obj);
+				DetailActivityMessage bean = new DetailActivityMessage(obj);
 				if (bean != null) {
 					handler.sendMessage(handler.obtainMessage(HANDLER_GET_HUODONG_DETAIL, bean));
 				}

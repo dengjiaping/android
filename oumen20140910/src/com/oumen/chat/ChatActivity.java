@@ -30,7 +30,7 @@ import com.oumen.TitleBar;
 import com.oumen.activity.detail.HuodongHttpController;
 import com.oumen.activity.detail.HuoDongDetailActivity;
 import com.oumen.activity.detail.cell.CircleCornerImageHasDownloadView;
-import com.oumen.activity.message.ActivityBean;
+import com.oumen.activity.message.DetailActivityMessage;
 import com.oumen.android.App;
 import com.oumen.android.App.NetworkType;
 import com.oumen.android.BaseActivity;
@@ -93,7 +93,7 @@ public class ChatActivity extends BaseActivity implements NotificationObserver {
 	private int activityId = 0;
 
 	private ActivityMessage activityMsg;
-	private ActivityBean activityBean = null;
+	private DetailActivityMessage activityBean = null;
 
 	private String tempTime = null;
 
@@ -689,9 +689,9 @@ public class ChatActivity extends BaseActivity implements NotificationObserver {
 				break;
 			case HuodongHttpController.HANDLER_GET_HUODONG_DETAIL://获取活动详情返回
 				if (msg.obj != null) {
-					if (msg.obj instanceof ActivityBean) {
+					if (msg.obj instanceof DetailActivityMessage) {
 						hasAttender = true;
-						activityBean = (ActivityBean) msg.obj;
+						activityBean = (DetailActivityMessage) msg.obj;
 						headerView.update(activityBean);
 					}
 					else if (msg.obj instanceof String) {

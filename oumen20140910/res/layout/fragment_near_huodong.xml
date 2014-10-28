@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.ab.view.pullview.AbPullListView
+    <com.oumen.activity.widget.RefushListView
         android:id="@+id/refreshablelistview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

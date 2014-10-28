@@ -18,18 +18,23 @@ public class Constants {
 	public static final String WEIXIN_APP_ID = "wx40c3611b66e1084a";// 微信app_id
 	public static final String WEIXIN_APP_SECRET = "29e1452a53f670a3d8cf750234179cf2";
 
+//	http://192.168.0.251/
 //	public static final boolean isDebug = true;
-//	public static String SOCKET_SERVER_IP = "114.113.228.123";
+//	public static String SOCKET_SERVER_IP = "192.168.0.251";
 //	public static int SOCKET_SERVER_PORT = 9020;
-//	public static final String HTTP_SERVER = "http://114.113.228.123";
+//	public static final String HTTP_SERVER = "http://192.168.0.251";
 //	public static final String DEFALUT_URL = HTTP_SERVER + ":8088/";
-//	public static final String DEFALUT_ACTIVITY_URL = HTTP_SERVER + ":9001/";
+//	public static final String DEFALUT_ACTIVITY_URL = HTTP_SERVER + ":8090/";
 //	public static final String MV_DEFAULT_URL = HTTP_SERVER + ":8088/";
 //	public static final String GET_MV_ID = MV_DEFAULT_URL + "mv/act/getId";// 获取视频编号
 //	public static final String MV_UPLOAD_FILE = MV_DEFAULT_URL + "mv/act/uploadFile";//分片上传
 //	public static final String MV_SHARE_TO_SINA_URL = MV_DEFAULT_URL + "user/share/weibo_share";// mv新浪微博分享
 //	public static final String MV_WEB_URL = MV_DEFAULT_URL + "user/share/show?";//	 网页查看mv链接
 //	public static final String MV_COVER_URL = DEFALUT_URL +"img/square/";//mv片头链接
+	
+	
+	
+	
 //	public static final String WEIXIN_APP_ID = "wxc2fdcfbba7f53752";// 微信测试api
 //	public static final String WEIXIN_APP_SECRET = "16e542c2d8517ab6b61c86c2f678ef3f";
 //	public static final String WEIXIN_APP_SECRET = "29e1452a53f670a3d8cf750234179cf2";
