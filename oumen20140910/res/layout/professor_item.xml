@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_bg_stroke"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/huodong_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="1px"
+        android:background="@drawable/pic_default"
+        android:contentDescription="@string/image_description" />
+
+    <TextView
+        android:id="@+id/huodong_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/huodong_image"
+        android:background="@color/transparent_half"
+        android:drawableLeft="@drawable/search_location"
+        android:padding="@dimen/padding_large"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_small" />
+
+    <TextView
+        android:id="@+id/huodong_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/huodong_image"
+        android:paddingLeft="@dimen/padding_large"
+        android:paddingRight="@dimen/padding_large"
+        android:paddingTop="@dimen/padding_large"
+        android:text="活动名称"
+        android:textColor="@color/default_text_bg"
+        android:textSize="@dimen/text_pretty" />
+
+    <TextView
+        android:id="@+id/huodong_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/huodong_title"
+        android:gravity="right"
+        android:paddingBottom="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_large"
+        android:singleLine="true"
+        android:textColor="@color/detail_orange"
+        android:textSize="@dimen/text_medium" />
+</RelativeLayout>

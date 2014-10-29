@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg_up"
+    android:orientation="vertical" >
+
+    <com.oumen.activity.widget.IndexViewPager
+        android:id="@+id/image_switch"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white" />
+
+    <com.oumen.activity.main.HuodongTagViewPager
+        android:id="@+id/tag_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/image_switch"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/professer_flag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tag_viewpager"
+        android:padding="@dimen/padding_large"
+        android:text="专家推荐"
+        android:textColor="@color/default_text_bg"
+        android:textSize="@dimen/text_pretty" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/professer_flag"
+        android:layout_marginBottom="@dimen/padding_large"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:orientation="horizontal" >
+
+        <com.oumen.activity.main.ProfessorItem
+            android:id="@+id/professor1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_large"
+            android:layout_weight="1.0" />
+
+        <com.oumen.activity.main.ProfessorItem
+            android:id="@+id/professor2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearlayout"
+        android:layout_marginBottom="@dimen/padding_large"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:orientation="horizontal" >
+
+        <com.oumen.activity.main.ProfessorItem
+            android:id="@+id/professor3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_large"
+            android:layout_weight="1.0" />
+
+        <com.oumen.activity.main.ProfessorItem
+            android:id="@+id/professor4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearlayout1"
+        android:padding="@dimen/padding_large"
+        android:text="热门推荐"
+        android:textColor="@color/default_text_bg"
+        android:textSize="@dimen/text_pretty" />
+
+</RelativeLayout>

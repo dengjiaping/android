@@ -233,7 +233,7 @@ public class NearActivityFragment extends BaseFragment {
 			if (v == btnLeft) {
 				getActivity().finish();
 			}
-			else if (v instanceof NearHuodongItem) {
+			else if (v instanceof DefaultHuodongItem) {
 				if (TextUtils.isEmpty(App.PREFS.getUserProfile())) {
 					//TODO 跳转到登录界面
 					loginConfrim.openDialog();
@@ -270,13 +270,13 @@ public class NearActivityFragment extends BaseFragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			NearHuodongItem item;
+			DefaultHuodongItem item;
 			if (convertView == null) {
-				item = new NearHuodongItem(getActivity());
+				item = new DefaultHuodongItem(getActivity());
 				item.setOnClickListener(clickListener);
 			}
 			else {
-				item = (NearHuodongItem) convertView;
+				item = (DefaultHuodongItem) convertView;
 			}
 			
 			itemData = data.get(position);

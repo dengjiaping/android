@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
 import com.oumen.R;
-import com.oumen.activity.detail.cell.CircleCornerImageHasDownloadView;
 import com.oumen.widget.file.ImageData;
 import com.oumen.widget.image.ImagePreviewActivity;
 import com.oumen.widget.preview.image.ImagePagerFragment;

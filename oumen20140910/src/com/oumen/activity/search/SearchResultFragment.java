@@ -28,7 +28,7 @@ import com.oumen.activity.HuodongTypeUtil.OrderType;
 import com.oumen.activity.detail.HuoDongDetailActivity;
 import com.oumen.activity.list.ActivityHostProvider;
 import com.oumen.activity.list.HuodongListHttpController;
-import com.oumen.activity.list.NearHuodongItem;
+import com.oumen.activity.list.DefaultHuodongItem;
 import com.oumen.activity.message.BaseActivityMessage;
 import com.oumen.android.App;
 import com.oumen.android.BaseFragment;
@@ -261,7 +261,7 @@ public class SearchResultFragment extends BaseFragment implements ActivityHostPr
 
 				controller.obtainActivities(HuodongTypeUtil.CONDITION_FUZZY_SEARCH, App.INT_UNSET, OrderType.DEFAULT.code(), null, 1);
 			}
-			else if (v instanceof NearHuodongItem) {
+			else if (v instanceof DefaultHuodongItem) {
 				if (TextUtils.isEmpty(App.PREFS.getUserProfile())) {
 					//TODO 跳转到登录界面
 					loginConfrim.openDialog();
@@ -297,13 +297,13 @@ public class SearchResultFragment extends BaseFragment implements ActivityHostPr
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			NearHuodongItem item;
+			DefaultHuodongItem item;
 			if (convertView == null) {
-				item = new NearHuodongItem(getActivity());
+				item = new DefaultHuodongItem(getActivity());
 				item.setOnClickListener(clickListener);
 			}
 			else {
-				item = (NearHuodongItem) convertView;
+				item = (DefaultHuodongItem) convertView;
 			}
 			BaseActivityMessage itemData = null;
 			synchronized (this) {

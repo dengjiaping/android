@@ -7,16 +7,12 @@ import com.oumen.R;
 import com.oumen.activity.message.DetailActivityMessage;
 import com.oumen.android.App;
 import com.oumen.message.ActivityMessage;
-import com.oumen.tools.ELog;
 import com.oumen.widget.file.ImageData;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.v4.view.ViewPager;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +28,6 @@ public class HuodongDetailHeader extends FrameLayout {
 	private NewHeaderAdapter adapter;
 	
 	private int width = App.INT_UNSET;
-	private Resources res ;
 	
 	protected ActivityMessage data;
 
@@ -50,9 +45,6 @@ public class HuodongDetailHeader extends FrameLayout {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.new_huodong_detail_headerview, this, true);
 
-		res = context.getResources();
-		width = res.getDisplayMetrics().widthPixels;
-		
 		viewpager = (ViewPager) findViewById(R.id.header_viewpager);
 		
 		adapter = new NewHeaderAdapter();
@@ -82,7 +74,6 @@ public class HuodongDetailHeader extends FrameLayout {
 	
 	public void update(DetailActivityMessage provider) {
 		title.setText(provider.getSenderName());
-		SpannableStringBuilder builder;
 		
 		int size = provider.getHuodongPics().size();
 		if (size > 0) {

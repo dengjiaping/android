@@ -214,6 +214,8 @@ public class Constants {
 	public static final String GET_ACTIVITY_COMMENTS = DEFALUT_ACTIVITY_URL + "huodong/act/commentList";
 	// 活动发表评论
 	public static final String PUBLISH_ACTIVITY_COMMENTS = DEFALUT_ACTIVITY_URL + "huodong/act/addComment";
+	//获取主界面的活动信息
+	public static final String GET_ACTIVITY_MAIN = "http://192.168.0.251:8090/huodong/act/getIndex";
 	
 	// =================================MV接口============================================
 	public static final String GET_MV_PREFIX = DEFALUT_URL + "mv/act/getnewpiclist";

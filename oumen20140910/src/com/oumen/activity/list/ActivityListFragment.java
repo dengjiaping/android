@@ -212,8 +212,6 @@ public class ActivityListFragment extends BaseFragment implements View.OnTouchLi
 		emptyView.setText(getResources().getString(R.string.activity_list_empty));
 		lstView.setEmptyView(emptyView);
 
-		lstView.getHeaderView().setHeaderProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
-		lstView.getFooterView().setFooterProgressBarDrawable(this.getResources().getDrawable(R.drawable.progress_circular));
 		lstView.setAdapter(adapter);
 		lstView.setSelector(android.R.color.transparent);
 		lstView.setAbOnListViewListener(listviewListener);

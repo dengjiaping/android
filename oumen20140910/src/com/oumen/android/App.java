@@ -46,6 +46,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
 import com.oumen.MainActivity;
 import com.oumen.R;
+import com.oumen.activity.message.ActivityTag;
 import com.oumen.android.util.Constants;
 import com.oumen.android.util.SharePreferenceUtil;
 import com.oumen.app.BaseApplication;
@@ -112,6 +113,8 @@ public class App extends BaseApplication implements OnGetGeoCoderResultListener 
 	
 	public static Map<String, List<City>> CITIES = new HashMap<String, List<City>>(); // 省份和城市列表
 	public static LinkedList<SortDataItem<City>> ALLCITIES = new LinkedList<SortDataItem<City>>();
+	
+	public static final List<ActivityTag> ACTIVITY_TAG_DATA = new ArrayList<ActivityTag>();
 	
 	public static Cache CACHE;
 	public static SharePreferenceUtil PREFS;
